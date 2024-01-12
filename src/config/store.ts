@@ -12,7 +12,11 @@ export const appStore = defineStore('app' ,{
     state: () => ({
         menuType: MenuType.BUTTON,
         bgType: BgType.STATIC,
-        bgUrl: new URL(`@/assets/img/wallPaper.jpg`, import.meta.url).href
+        bgUrl: new URL(`@/assets/img/macBg.webp`, import.meta.url).href,
+        wallPaperList: [
+            new URL(`@/assets/img/macBg.webp`, import.meta.url).href,
+            new URL(`@/assets/img/wallPaper.jpg`, import.meta.url).href
+        ]
     }),
     actions: {
         setMenuType(type: MenuType){

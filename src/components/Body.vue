@@ -33,9 +33,8 @@ const bgUrl = computed(() => appStore().bgUrl)
 <style lang="scss" scoped>
   .home{
       border-radius: 10px;
-      box-shadow: 0 0 100px #727272;
       position: fixed;
-      inset: 20px;
+      inset: 10px;
       display: flex;
       background-size: cover;
       background-position: center center;

@@ -57,14 +57,14 @@ const fileList = computed(() => allfileList.value.filter(v => v.title.toLocaleLo
   height: 44px;
   padding: 20px 10px;
   position: absolute;
-  top: 0;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(37,67,98,0.7), rgba(37,67,98,0));
+  top: 0;
   .inp{
     width: 60%;
     margin: 0 auto;
     border-radius: 20px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255,255,255,1);
+    box-shadow: 0 10px 50px rgba(37,67,98, .5);
   }
 
   @media screen and (max-width: 478px) {

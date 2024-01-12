@@ -56,7 +56,7 @@ function onDetail() {
     height: 100px;
     margin: 1%;
     border-radius: 10px;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(255,255,255,0.95);
     font-size: 20px;
     color: #0d2e4eb3;
     font-weight: bold;

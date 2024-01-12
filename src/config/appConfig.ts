@@ -13,4 +13,5 @@ export default class AppConfig {
      * 😀 路由
      */
     static router: Router
+    
 }

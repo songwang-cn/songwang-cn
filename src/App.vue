@@ -10,6 +10,6 @@ import Body from '@/components/Body.vue'
 
 <style lang="scss">
   body{
-    background-color: #000;
+    background-color: #111;
   }
 </style>
