@@ -52,7 +52,6 @@ console.log( navigator.userAgent)
 .header {
   height: 30px;
   padding: 5px 10px;
-  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -32,12 +32,10 @@ const bgUrl = computed(() => appStore().bgUrl)
   
 <style lang="scss" scoped>
   .home{
-      position: relative;
       border-radius: 10px;
       box-shadow: 0 0 100px #727272;
-      height: calc(100vh - 30px);
-      width: calc((100vh - 30px) / 16 * 8);
-      margin: 15px auto;
+      position: fixed;
+      inset: 20px;
       display: flex;
       background-size: cover;
       background-position: center center;
@@ -45,7 +43,7 @@ const bgUrl = computed(() => appStore().bgUrl)
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: 500ms;
+      transition: 200ms;
       .content{
         flex: 1;
         overflow-y: auto;
@@ -57,10 +55,11 @@ const bgUrl = computed(() => appStore().bgUrl)
 
     @media screen and (max-width: 478px) {
       .home{
+        position: relative;
+        inset: 0;
         width: 100%;
         height: 100vh;
         border-radius: 0;
-        margin: 0;
     }
   }
 

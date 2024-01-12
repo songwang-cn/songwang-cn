@@ -52,12 +52,12 @@ function onDetail() {
 }
 .note_item{
     transition: 200ms;
-    width: 47%;
-    height: 80px;
-    margin: 1.5%;
+    width: 18%;
+    height: 100px;
+    margin: 1%;
     border-radius: 10px;
     background-color: rgba(255,255,255,0.9);
-    font-size: 17px;
+    font-size: 20px;
     color: #0d2e4eb3;
     font-weight: bold;
     overflow: hidden;
@@ -69,8 +69,23 @@ function onDetail() {
     align-items: center;
     justify-content: space-evenly;
     box-shadow: 0 0 20px #b1b1b1;
+    &:hover{
+      transform: scale(1.1);
+    }
     &:active{
       transform: scale(0.9);
     }
+}
+
+@media screen and (max-width: 478px) {
+  .note_item{
+    width: 47%;
+    margin: 1.5%;
+    height: 80px;
+    font-size: 17px;
+    &:hover{
+      transform: scale(1);
+    }
+  }
 }
 </style>

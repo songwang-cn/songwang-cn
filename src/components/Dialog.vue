@@ -82,13 +82,13 @@ function closeHandler() {
         height: 100%;
         width: 100%;
         border-radius: 10px;
-        transform-origin: 50% 60%;
-        animation: dialog-in forwards 400ms ease-in-out;
+        transform-origin: 50% 80%;
+        animation: dialog-in forwards 300ms ease-in-out;
         display: flex;
         flex-direction: column;
         overflow: hidden;
         box-shadow: 0 0 50px #525252;
-        background: rgba(255,255,255,.85);
+        background: #fff;
         .dialog_top{
             user-select: none;
             padding: 12px;

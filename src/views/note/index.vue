@@ -3,7 +3,7 @@
   <div class="note">
     <div class="input-search">
       <van-field 
-        style="border-radius: 20px;background-color: rgba(255,255,255,0.9);" 
+        class="inp" 
         placeholder="输入关键字搜索" 
         v-model="searchVal" 
       />
@@ -60,9 +60,22 @@ const fileList = computed(() => allfileList.value.filter(v => v.title.toLocaleLo
   top: 0;
   inset: 0;
   background: linear-gradient(to bottom, rgba(37,67,98,0.7), rgba(37,67,98,0));
+  .inp{
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 20px;
+    background-color: rgba(255,255,255,0.9);
+  }
+
+  @media screen and (max-width: 478px) {
+    .inp{
+      width: 100%;
+      border-radius: 20px;
+    }
+  }
 }
 .note-list{
-  padding: 70px 10px 0 10px;
+  padding: 80px 10px 100px 10px;
   user-select: none;
   flex: 1;
   display: flex;
