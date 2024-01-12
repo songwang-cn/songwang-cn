@@ -52,42 +52,25 @@ function onDetail() {
 }
 .note_item{
     transition: 200ms;
-    width: 20%;
-    height: 150px;
-    line-height: 150px;
-    transform: scale(0.95);
-    background-color: rgba($color: #000, $alpha: 0.2);
-    backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-    font-size: 20px;
-    font-weight: bold;
+    width: 47%;
+    height: 80px;
+    margin: 1.5%;
     border-radius: 10px;
-    margin-bottom: 10px;
-    color: #fff;
+    background-color: rgba(255,255,255,0.9);
+    font-size: 17px;
+    color: #0d2e4eb3;
+    font-weight: bold;
     overflow: hidden;
     text-align: center;
     text-overflow: ellipsis;
-    padding: 0 10px;
     transition: 300ms;
     cursor: pointer;
-    line-height: normal;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    box-shadow: 0 0 2px #fff;
-    &:hover{
-      transform: scale(1.02);
-      z-index: 999;
+    box-shadow: 0 0 20px #b1b1b1;
+    &:active{
+      transform: scale(0.9);
     }
-}
-
-@media screen and (max-width: 768px) {
-  .note_item{
-    width: 33.3%;
-    height: 70px;
-    font-size: 14px;
-    font-weight: 400;
-    word-break: break-all;
-  }
 }
 </style>

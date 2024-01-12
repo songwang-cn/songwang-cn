@@ -18,10 +18,9 @@ import {ref} from "vue"
 <style lang="scss" scoped>
 .panel{
     // background-color: rgba($color: #000000, $alpha: 0.5);
-    padding: 10px;
     height: 100%;
     border-radius: 10px;
-    animation: panel-show 0.3s ease-in-out;
+    animation: panel-show 0.5s ease-in-out;
 
     @keyframes panel-show{
         0%{

@@ -12,7 +12,7 @@ export const appStore = defineStore('app' ,{
     state: () => ({
         menuType: MenuType.BUTTON,
         bgType: BgType.STATIC,
-        bgUrl: 'https://infinitypro-img.infinitynewtab.com/wallpaper/ocean/11656.jpg' //https://infinitypro-img.infinitynewtab.com/wallpaper/athletics/658.jpg
+        bgUrl: new URL(`@/assets/img/wallPaper.jpg`, import.meta.url).href
     }),
     actions: {
         setMenuType(type: MenuType){

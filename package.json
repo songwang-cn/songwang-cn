@@ -7,22 +7,24 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
-    "ant-design-vue": "^4.0.0",
-    "element-plus": "^2.5.0",
-    "eslint": "^8.47.0",
-    "gsap": "^3.12.4",
-    "guess": "^1.0.2",
-    "lunar": "0.0.3",
     "pinia": "^2.1.6",
-    "postcss-px-to-viewport": "^1.1.1",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
+    "vant": "^4.8.2",
     "vue": "^3.2.37",
     "vue-router": "^4.2.4",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.1",
-    "vite": "^3.0.1"
+    "vite": "^3.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "eslint": "^8.41.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^9.14.1"
   }
 }

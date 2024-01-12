@@ -1,15 +1,15 @@
 <template>
-  <ConfigProvider
-    :theme="Theme"
-  >
-    <Body>
-      <router-view />
-    </Body>
-  </ConfigProvider>
+  <Body>
+    <router-view />
+  </Body>
 </template>
 
 <script setup lang="ts">
 import Body from '@/components/Body.vue'
-import { ConfigProvider } from 'ant-design-vue'
-import Theme from '@/theme/index'
 </script>
+
+<style lang="scss">
+  body{
+    background-color: #000;
+  }
+</style>

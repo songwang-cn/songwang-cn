@@ -27,15 +27,6 @@ export const routes: Array<RouteRecordRaw> = [
             icon: 'icon-suijishushengcheng'
         }
     },
-    {
-        path: '/other',
-        name: 'Other',
-        component: () => import('../views/other/index.vue'),
-        meta: {
-            title: '其他',
-            icon: 'icon-ceshigongju'
-        }
-    },
 /*     {
         path: '/bio',
         name: 'Bio',

@@ -1,15 +1,22 @@
 
 <template>
-    <div style="padding: 10px;display: flex;align-items: center;justify-content: space-around;">
-      <a-input placeholder="输入关键字搜索" size="large" style="width: 50%;" v-model:value="searchVal" />
+  <div class="note">
+    <div class="input-search">
+      <van-field 
+        style="border-radius: 20px;background-color: rgba(255,255,255,0.9);" 
+        placeholder="输入关键字搜索" 
+        v-model="searchVal" 
+      />
     </div>
-    <div class="note_content">
+    <div class="note-list" :key="fileList.length">
         <NoteItem 
           v-for="item,index in fileList"
           :index="index"
+          :key="index"
           :note-info="item" 
         />
     </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -39,12 +46,27 @@ const fileList = computed(() => allfileList.value.filter(v => v.title.toLocaleLo
 </script>
 
 <style lang="scss" scoped>
-.note_content{
+.note{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+.input-search{
+  height: 44px;
+  padding: 20px 10px;
+  position: absolute;
+  top: 0;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(37,67,98,0.7), rgba(37,67,98,0));
+}
+.note-list{
+  padding: 70px 10px 0 10px;
   user-select: none;
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
   overflow-y: auto;
   align-content: flex-start;
 }

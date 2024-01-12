@@ -7,97 +7,102 @@
 -->
 <template>
   <div class="header">
-    <div class="actions">
-        <i v-for="route of AppConfig.router.getRoutes()" @click="AppConfig.router.push(route.path)" :class="`action iconfont ${route.meta.icon}`" />
-        <i class="action iconfont icon-shezhi-xianxing" @click="UseConfigPanel" />
+    <div class="left">
+      <i class="iconfont icon-xinhao">
+        <span>中国电信</span>
+      </i>
+      <i class="iconfont icon-wifi" />
     </div>
-    <img @click="AppConfig.router.push('/')" :src="Logo" style="height: 30px; width: 30px;"/>
-    <div class="time" @click="UseClander($event, 300)">
+    <div class="time">
       {{ nowTime }}
+    </div>
+    <div class="right">
+      <div class="battery">
+        <div class="percent">80%</div>
+        <i class="iconfont icon-icon-test" />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import AppConfig from '@/config/appConfig'
-import { DialogHelper } from '@/helper/DialogHelper';
-import ConfigModal from '@/views/config/index.vue'
 import { ref } from 'vue'
-import UseConfigPanel from '@/use/UseConfigPanel';
-import Clander from './Clander.vue';
-import UseClander from '@/use/UseClander';
-import Logo from '@/assets/img/3.ico';
 
 const nowTime = ref('')
 
-setInterval(() => {
+function updateTime() {
   const date = new Date()
-  nowTime.value = date.getHours() + ':' + getNum(date.getMinutes()) + ':' + getNum(date.getSeconds())
-}, 1000)
-
-function getNum(num: number) {
-  return num >= 10 ? num : `0${num}`
+  const leftString = date.getHours() >= 12 ? '下午' : '上午'
+  const timeStringArr = date.toLocaleTimeString().split(':')
+  timeStringArr.pop()
+  nowTime.value = leftString + ' ' + timeStringArr.join(':')
 }
+
+updateTime()
+
+setInterval(() => {
+  updateTime()
+}, 1000)
 
 console.log( navigator.userAgent)
 
 </script>
 
 <style lang="scss">
-:deep(.ant-popover-inner) {
-  background-color: red;
-}
-
 .header {
-  height: 40px;
+  height: 30px;
   padding: 5px 10px;
-  background-color: rgba($color: #fff, $alpha: 0.2);
   backdrop-filter: blur(5px);
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .left, .right{
+    width: 30%;
+  }
+
+  .right{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .iconfont{
+    color: #fff;
+    margin: 0 5px;
+    font-size: 17px;
+    display: inline-flex;
+    align-items: center;
+    span{
+      font-size: 12px;
+      display: inline-block;
+      padding-left: 5px;
+    }
+  }
+
+  .battery{
+    display: flex;
+    align-items: center;
+    .percent{
+      font-size: 12px;
+      font-weight: 300;
+      color: #fff;
+    }
+  }
 
   .time {
     letter-spacing: 1px;
     color: #fff;
     user-select: none;
-    font-family: 'LCD';
-    font-size: 20px;
+    font-size: 14px;
     cursor: pointer;
   }
 
-  .actions {
-    .action {
-      font-size: 20px;
-      margin-right: 15px;
-      transition: 20ms;
-      transition: 300ms;
-      color: #000;
-      cursor: pointer;
-
-      &:active {
-        transform: scale(0.9);
-      }
-    }
-  }
-
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 478px) {
   .header{
-    .actions{
-      .action{
-        font-size: 16px;
-        color: #fff;
-      }
-    }
-    .time{
-      width: 120px;
-      white-space: nowrap;
-      text-align: right;
-      font-size: 16px;
-    }
+    display: none;
   }
 }
+
+
 </style>

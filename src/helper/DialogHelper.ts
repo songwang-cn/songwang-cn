@@ -6,7 +6,7 @@
  * @FilePath: \VueJS\src\helper\DialogHelper.ts
  */
 import { App, Component, createApp } from "vue";
-import ANTD from 'ant-design-vue'
+import Vant from 'vant'
 /*
  * @Author: songwang 112054945@qq.com
  * @Date: 2023-08-21 17:41:39
@@ -49,9 +49,9 @@ export class DialogHelper{
             })
 
             
-            app.use(ANTD)
+            app.use(Vant)
 
-            document.body.appendChild(node)
+            document.getElementById('home')?.appendChild(node)
 
             app.mount(node)
         })

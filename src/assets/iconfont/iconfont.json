@@ -6,6 +6,27 @@
   "description": "框架",
   "glyphs": [
     {
+      "icon_id": "1160980",
+      "name": "wifi",
+      "font_class": "wifi",
+      "unicode": "e8e4",
+      "unicode_decimal": 59620
+    },
+    {
+      "icon_id": "3067082",
+      "name": "80%",
+      "font_class": "icon-test",
+      "unicode": "e740",
+      "unicode_decimal": 59200
+    },
+    {
+      "icon_id": "24242804",
+      "name": "信号",
+      "font_class": "xinhao",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
       "icon_id": "4893447",
       "name": "设置更新",
       "font_class": "shezhigengxin",
