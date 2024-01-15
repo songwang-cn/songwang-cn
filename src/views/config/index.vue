@@ -64,6 +64,14 @@ function onChange(item: any) {
         display: flex;
         align-items: center;
     }
+
+@media screen and (max-width: 478px) {
+    .van-cell__value{
+        white-space: nowrap;
+        overflow: auto;
+    }
+}
+    
 }
 
     .item{
@@ -74,10 +82,14 @@ function onChange(item: any) {
         overflow: hidden;
         cursor: pointer;
         margin: 5px;
+        transition: 200ms all ease-in-out;
+        &:hover{
+            transform: scale(1.1);
+        }
     }
 
     .isThis{
-        box-shadow: 0 0 0 3px #f59300;
+        box-shadow: 0 0 0 3px rgba(0,0,0,.3);
         position: relative;
         &::after{
             content: '当前';

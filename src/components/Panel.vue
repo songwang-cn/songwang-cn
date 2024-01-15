@@ -21,8 +21,6 @@ import {ref} from "vue"
     height: 100%;
     border-radius: 10px;
     animation: panel-show 0.5s ease-in-out;
-    display: flex;
-    flex-direction: column;
 
     @keyframes panel-show{
         0%{

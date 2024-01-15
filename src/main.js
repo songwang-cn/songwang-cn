@@ -8,6 +8,7 @@ import { createPinia } from 'pinia'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 import { ConfigProvider } from 'vant';
+import 'swiper/css';
 
 AppConfig.router = router
 
