@@ -6,7 +6,7 @@
  * @FilePath: \Vue3vite\src\components\Header.vue
 -->
 <template>
-  <div class="header">
+  <div class="app-header">
     <div class="left">
       <i class="iconfont icon-xinhao">
         <span>中国电信</span>
@@ -49,12 +49,15 @@ console.log( navigator.userAgent)
 </script>
 
 <style lang="scss">
-.header {
+.app-header {
   height: 30px;
   padding: 5px 10px;
   display: flex;
+  position: absolute;
+  inset: 0;
   align-items: center;
   justify-content: space-between;
+  z-index: 997;
   .left, .right{
     width: 30%;
   }
@@ -97,8 +100,8 @@ console.log( navigator.userAgent)
 
 }
 
-@media screen and (max-width: 478px) {
-  .header{
+@media screen and (max-width: 501px) {
+  .app-header{
     display: none;
   }
 }

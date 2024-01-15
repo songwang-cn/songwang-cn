@@ -1,7 +1,16 @@
 
 <template>
   <Transition name="noteItem">
-    <div v-if="show" ref="noteItem" class="note_item" @click="onDetail">
+    <div 
+      v-if="show"
+      ref="noteItem" 
+      class="note_item" 
+      @click="onDetail"
+      :style="{
+         background: appStore().theme === 'light' ? '#fff' : 'rgba(0,0,0,.9)',
+         color: appStore().theme === 'light' ? '#111' : '#fff'
+      }"
+     >
       {{ noteInfo.title }}
     </div>
   </Transition>
@@ -12,6 +21,7 @@
 import { DialogHelper } from "@/helper/DialogHelper";
 import Detail from "./detail.vue";
 import {onMounted, ref} from 'vue'
+import { appStore } from "@/config/store";
 
 const props = defineProps({
     index: {
@@ -56,7 +66,6 @@ function onDetail() {
     height: 100px;
     margin: 1%;
     border-radius: 10px;
-    background-color: #fff;
     font-size: 20px;
     color: #09213ab3;
     font-weight: bold;
@@ -77,7 +86,7 @@ function onDetail() {
     }
 }
 
-@media screen and (max-width: 478px) {
+@media screen and (max-width: 501px) {
   .note_item{
     width: 47%;
     margin: 1.5%;

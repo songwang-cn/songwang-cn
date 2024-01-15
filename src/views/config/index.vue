@@ -58,6 +58,7 @@ function onChange(item: any) {
 
 <style lang="scss" scoped>
 :deep(.van-cell){
+    padding: 10px 0;
     .van-cell__title{
         flex: 0;
         min-width: 20%;
@@ -65,12 +66,12 @@ function onChange(item: any) {
         align-items: center;
     }
 
-@media screen and (max-width: 478px) {
-    .van-cell__value{
-        white-space: nowrap;
-        overflow: auto;
+    @media screen and (max-width: 501px) {
+        .van-cell__value{
+            white-space: nowrap;
+            overflow: auto;
+        }
     }
-}
     
 }
 

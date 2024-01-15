@@ -6,6 +6,10 @@
         class="inp" 
         placeholder="输入关键字搜索" 
         v-model="searchVal" 
+        :style="{
+          background: appStore().theme === 'light' ? '#fff' : 'rgba(0,0,0,.9)',
+          color: appStore().theme === 'light' ? '#111' : '#fff'
+        }"
       />
     </div>
     <div class="note-list" :key="fileList.length">
@@ -20,6 +24,7 @@
 </template>
 
 <script lang="ts" setup>
+import { appStore } from '@/config/store';
 import NoteItem from './noteItem.vue'
 import { ref, computed } from 'vue'
 
@@ -55,27 +60,19 @@ const fileList = computed(() => allfileList.value.filter(v => v.title.toLocaleLo
 }
 .input-search{
   height: 44px;
-  padding: 20px 10px;
   position: absolute;
   inset: 0;
-  top: 0;
+  padding: 0 10px;
+  top: 50px;
   .inp{
     width: 60%;
     margin: 0 auto;
     border-radius: 20px;
-    background-color: rgba(255,255,255,1);
     box-shadow: 0 10px 50px rgba(37,67,98, .5);
-  }
-
-  @media screen and (max-width: 478px) {
-    .inp{
-      width: 100%;
-      border-radius: 20px;
-    }
   }
 }
 .note-list{
-  padding: 80px 10px 100px 10px;
+  padding: 100px 10px 100px 10px;
   user-select: none;
   flex: 1;
   display: flex;
@@ -83,4 +80,18 @@ const fileList = computed(() => allfileList.value.filter(v => v.title.toLocaleLo
   overflow-y: auto;
   align-content: flex-start;
 }
+
+@media screen and (max-width: 501px) {
+    .input-search{
+      top: 20px;
+      .inp{
+        width: 100%;
+        border-radius: 20px;
+      }
+    }
+    .note-list{
+       padding: 70px 10px 100px 10px;
+    }
+   
+  }
 </style>

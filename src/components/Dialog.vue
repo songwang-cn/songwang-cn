@@ -141,7 +141,7 @@ function closeHandler() {
         }
     }
 
-    @media screen and (max-width: 478px) {
+    @media screen and (max-width: 501px) {
         .main{
          border-radius: 0;
         }

@@ -7,7 +7,7 @@
 -->
 <template>
   <div class="panel">
-    <slot name="body"></slot>
+      <slot />
   </div>
 </template>
 
@@ -21,6 +21,7 @@ import {ref} from "vue"
     height: 100%;
     border-radius: 10px;
     animation: panel-show 0.5s ease-in-out;
+    position: relative;
 
     @keyframes panel-show{
         0%{

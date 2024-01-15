@@ -85,7 +85,7 @@ const appList = ref([
         }
     }
 
-    @media screen and (max-width: 478px) {
+    @media screen and (max-width: 501px) {
         .footer{
             width: 100%;
             border-radius: 0;
