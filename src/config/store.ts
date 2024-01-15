@@ -1,32 +1,18 @@
-/*
- * @Author: songwang 112054945@qq.com
- * @Date: 2023-08-23 16:05:32
- * @LastEditors: Do not edit
- * @LastEditTime: 2023-09-19 15:48:09
- * @FilePath: \Vue3vite\src\config\store.ts
- */
 import { defineStore } from 'pinia'
-import { BgType, MenuType } from '@/enum'
 
 export const appStore = defineStore('app' ,{
     state: () => ({
-        menuType: MenuType.BUTTON,
-        bgType: BgType.STATIC,
-        bgUrl: new URL(`@/assets/img/macBg.webp`, import.meta.url).href,
-        wallPaperList: [
-            new URL(`@/assets/img/macBg.webp`, import.meta.url).href,
-            new URL(`@/assets/img/wallPaper.jpg`, import.meta.url).href
-        ]
+        theme: localStorage.getItem('theme') || 'light',
+        bgUrl: localStorage.getItem('bgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href
     }),
     actions: {
-        setMenuType(type: MenuType){
-            this.menuType = type
-        },
-        setBgType(type: BgType){
-            this.bgType = type
+        changeTheme(){
+            this.theme = this.theme === 'light' ? 'dark' : 'light'
+            localStorage.setItem('theme', this.theme)
         },
         setBgUrl(url: string){
             this.bgUrl = url
+            localStorage.setItem('bgUrl', this.bgUrl)
         }
     }
 })

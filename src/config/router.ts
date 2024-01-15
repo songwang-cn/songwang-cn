@@ -36,7 +36,6 @@ export const routes: Array<RouteRecordRaw> = [
             icon: 'icon-wodejianli'
         }
     }, */
-
     {
         path: '/note',
         name: 'Note',

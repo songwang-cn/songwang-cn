@@ -7,13 +7,14 @@ import AppConfig from '@/config/appConfig'
 import { createPinia } from 'pinia'
 import Vant from 'vant';
 import 'vant/lib/index.css';
-import 'swiper/css';
+import { ConfigProvider } from 'vant';
 
 AppConfig.router = router
 
 createApp(App)
     .use(Vant)
     .use(router)
+    .use(ConfigProvider)
     .use(createPinia())
     .mount('#app')
 

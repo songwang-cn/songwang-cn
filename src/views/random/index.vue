@@ -14,13 +14,13 @@
             </div>
         </div>
         <template #footer>
-            <van-button size="small" type="primary" @click="onRandom" :loading="isRuning">
+            <van-button type="primary" @click="onRandom" :loading="isRuning">
                 开始随机<span v-if="isRuning">&nbsp;{{ Math.ceil(countDown - nowRandomPassedSecond / 1000) }}</span>
             </van-button>
-            <van-button size="small" @click="stopRandom" v-if="isRuning">
+            <van-button @click="stopRandom" v-if="isRuning">
                 停止随机
             </van-button>
-            <van-button size="small" type="danger" @click="onClean" v-if="!isRuning">
+            <van-button type="danger" @click="onClean" v-if="!isRuning">
                 清除结果
             </van-button>
         </template>

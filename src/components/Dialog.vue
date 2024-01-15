@@ -1,6 +1,13 @@
 <template>      
     <div :class="['dialog', isClosing && 'on-close']">  
-        <div ref="main" class="main">
+        <div 
+            ref="main" 
+            class="main"
+            :style="{
+                background: appStore().theme === 'light' ? '#fff' : '#1c1c1e',
+                color: appStore().theme === 'light' ? '#111' : '#fff'
+            }"
+        >
             <div class="dialog_top">
                 <div class="left">
                     <i @click.self="closeHandler()" class="back iconfont icon-arrow-left" />
@@ -18,9 +25,9 @@
             <div class="dialog_footer" v-if="!hideCtrl">
                 <slot name="footer">
                     <slot name="footer-left"/>
-                    <van-button @click="onClose()"   v-if="!hideCancel">取消</van-button>
+                    <!--<van-button @click="onClose()" v-if="!hideCancel">取消</van-button> -->
                     <slot name="footer-center"/>
-                    <van-button type="primary" v-if="!hideConfirm">确定</van-button>
+                    <!--<van-button type="primary" v-if="!hideConfirm">确定</van-button> -->
                     <slot name="footer-right"/>
                 </slot>
             </div>
@@ -29,6 +36,7 @@
 </template>
 
 <script lang="ts" setup>
+import { appStore } from "@/config/store";
 import { useSlots, ref } from "vue";
 
 const props = defineProps({
@@ -88,14 +96,12 @@ function closeHandler() {
         flex-direction: column;
         overflow: hidden;
         box-shadow: 0 0 50px #525252;
-        background: #fff;
         .dialog_top{
             user-select: none;
             padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #fff;
             .left, .right{
                 width: 20%;
             }

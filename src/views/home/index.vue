@@ -8,17 +8,20 @@
 <template>
   <Panel>
     <template #body>
-      <Swiper pagination>
-        <SwiperSlide>
+      <van-swipe 
+        class="my-swipe" 
+        indicator-color="white"
+      >
+        <van-swipe-item>
           <Page1 />
-        </SwiperSlide>
-        <SwiperSlide>
+        </van-swipe-item>
+        <van-swipe-item>
           <Page2 />
-        </SwiperSlide>
-        <SwiperSlide>
+        </van-swipe-item>
+        <van-swipe-item>
           <Note />
-        </SwiperSlide>
-      </Swiper>
+        </van-swipe-item>
+      </van-swipe>
     </template>
   </Panel>
 </template>
@@ -33,10 +36,11 @@ import Page2 from './page2.vue';
 </script>
 
 <style lang="scss" scoped>
-  :deep(.swiper){
-    height: 100%;
+  .my-swipe{
+    flex: 1;
+    margin-bottom: 90px;
     cursor: pointer;
-    .swiper-slide{
+    .van-swipe-item{
       display: flex;
       flex-direction: column;
       overflow: hidden;

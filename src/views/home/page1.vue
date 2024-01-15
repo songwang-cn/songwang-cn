@@ -37,12 +37,7 @@ const appList = ref([
         name: '点名',
         isSvg: false,
         action: () => DialogHelper.show(Random)
-    },
-    {
-        name: '笔记',
-        isSvg: false,
-        action: () => DialogHelper.show(Note)
-    },
+    }
 ])
 </script>
 

@@ -56,9 +56,9 @@ function onDetail() {
     height: 100px;
     margin: 1%;
     border-radius: 10px;
-    background-color: rgba(255,255,255,0.95);
+    background-color: #fff;
     font-size: 20px;
-    color: #0d2e4eb3;
+    color: #09213ab3;
     font-weight: bold;
     overflow: hidden;
     text-align: center;
@@ -68,7 +68,7 @@ function onDetail() {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    box-shadow: 0 0 20px #b1b1b1;
+    box-shadow: 0 0 10px #8a8a8a;
     &:hover{
       transform: scale(1.1);
     }

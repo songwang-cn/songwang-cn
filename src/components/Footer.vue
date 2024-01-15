@@ -62,7 +62,7 @@ const appList = ref([
         border-radius: 10px;
         display: inline-block;
         margin: 10px auto;
-        background-color: rgba($color: #fff, $alpha: 0.2);
+        background-color: rgba($color: #aaa, $alpha: 0.6);
         backdrop-filter: blur(3px);
         display: flex;
         padding: 5px 20px;
