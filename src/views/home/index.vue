@@ -6,7 +6,6 @@
  * @FilePath: \Vue3vite\src\views\home\index.vue
 -->
 <template>
-  <Bubble />
   <Panel>
     <Swiper pagination>
       <SwiperSlide>
@@ -28,7 +27,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import Note from '@/views/note/index.vue';
 import Page1 from './page1.vue';
 import Page2 from './page2.vue';
-import Bubble from '@/components/Bubble.vue';
 
 </script>
 

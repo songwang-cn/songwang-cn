@@ -13,6 +13,8 @@
     >
       <Header />
         <div class="content">
+          <Bubble />
+          <MusicBar />
           <slot />
         </div>
       <Footer />
@@ -23,8 +25,9 @@
 import Header from './Header.vue';
 import Footer from './Footer.vue';
 import { appStore } from '@/config/store';
-import { BgType, MenuType } from '@/enum';
 import { computed } from 'vue'
+import Bubble from '@/components/Bubble.vue';
+import MusicBar from '@/components/MusicBar.vue'
 
 const bgUrl = computed(() => appStore().bgUrl)
  
