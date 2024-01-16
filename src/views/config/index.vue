@@ -1,19 +1,19 @@
 <template>
     <Dialog title="系统设置">
         <van-cell-group>
-            <van-cell title="更换壁纸">
+            <van-cell title="系统壁纸">
                 <template #value>
                     <div 
                         class="item" 
                         :class="[appStore().bgUrl.indexOf(item.default) >= 0  && 'isThis']" 
                         v-for="item of allWallPaper"
-                        @click="onChange(item)"
+                        @click="onChangeSystemBg(item)"
                     >
                         <van-image width="100%" height="100%" :src="(item as any).default" fit="cover"/>
                     </div>
                 </template>
             </van-cell>
-            <van-cell title="随机网络壁纸">
+            <van-cell title="网络壁纸">
                 <van-switch 
                     active-value="random"
                     inactive-value="system" 
@@ -63,8 +63,13 @@ function themeChange() {
     appStore().changeTheme()
 }
 
-function onChange(item: any) {
+function onChangeSystemBg(item: any) {
+    if(appStore().bgType === 'random'){
+        appStore().changeBgType()
+        bgType.value = appStore().bgType
+    }
     try{
+
         appStore().setBgUrl(new URL(item.default, import.meta.url).href)
         showToast ({ 
             type: 'success', 

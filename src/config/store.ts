@@ -17,9 +17,11 @@ export const appStore = defineStore('app' ,{
             localStorage.setItem('theme', this.theme)
         },
         setBgUrl(url: string){
-            this.setLastBgUrl(this.bgUrl)
             this.bgUrl = url
             localStorage.setItem('bgUrl', this.bgUrl)
+            if(this.bgType === 'system') {
+                this.setLastBgUrl(this.bgUrl)
+            }
         },
         setLastBgUrl(url: string){
             this.lastBgUrl = url

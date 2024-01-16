@@ -6,6 +6,27 @@
   "description": "框架",
   "glyphs": [
     {
+      "icon_id": "7156146",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "10219426",
+      "name": "暂停播放",
+      "font_class": "zantingbofang",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "36058602",
+      "name": "实心-上一首",
+      "font_class": "shixin-shangyishou",
+      "unicode": "e929",
+      "unicode_decimal": 59689
+    },
+    {
       "icon_id": "22789136",
       "name": "上拉收起",
       "font_class": "shanglashouqi",

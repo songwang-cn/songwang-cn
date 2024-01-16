@@ -52,11 +52,6 @@ async function onRandomTrigger() {
       transform: scale(.8);
       letter-spacing: 1px;
       cursor: pointer;
-      transition: 400ms;
-      &:hover{
-        transform: scale(.9);
-        border-radius: 15px;
-      }
     }
 }
 </style>
