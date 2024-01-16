@@ -14,7 +14,7 @@
       <i class="iconfont icon-wifi" />
     </div>
     <div class="time">
-      {{ nowTime }}
+      {{ `${leftString} ${HH}:${mm}` }}
     </div>
     <div class="right">
       <div class="battery">
@@ -26,25 +26,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import {UseTime} from '@/use/UseTime'
 
-const nowTime = ref('')
-
-function updateTime() {
-  const date = new Date()
-  const leftString = date.getHours() >= 12 ? '下午' : '上午'
-  const timeStringArr = date.toLocaleTimeString().split(':')
-  timeStringArr.pop()
-  nowTime.value = leftString + ' ' + timeStringArr.join(':')
-}
-
-updateTime()
-
-setInterval(() => {
-  updateTime()
-}, 1000)
-
-console.log( navigator.userAgent)
+const { HH, mm, leftString } = UseTime()
 
 </script>
 

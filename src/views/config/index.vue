@@ -13,6 +13,14 @@
                     </div>
                 </template>
             </van-cell>
+            <van-cell title="随机网络壁纸">
+                <van-switch 
+                    active-value="random"
+                    inactive-value="system" 
+                    v-model="bgType" 
+                    @change="bgTypeChange"
+                />
+            </van-cell>
             <van-cell title="深色主题">
                 <van-switch 
                     active-value="dark"
@@ -30,15 +38,30 @@ import { ref } from 'vue'
 import Dialog from '@/components/Dialog.vue'
 import { appStore } from '@/config/store'
 import { showToast  } from 'vant';
+import { UseRandomBg } from '@/use/UseRandomBg'
+
+const allWallPaper = import.meta.glob('../../assets/img/wallPaper/*.*', {eager: true})
+
+const bgType = ref(appStore().bgType)
+
+async function bgTypeChange() {
+    appStore().changeBgType()
+    if(bgType.value === 'random') {
+        UseRandomBg()
+    }else{
+        appStore().setBgUrl(appStore().lastBgUrl)
+        showToast({
+            message: '已切换为系统壁纸模式', 
+            type: 'success'
+        })
+    }
+}
 
 const theme = ref(appStore().theme)
 
 function themeChange() {
     appStore().changeTheme()
 }
-
-const allWallPaper = import.meta.glob('../../assets/img/wallPaper/*.*', {eager: true})
-
 
 function onChange(item: any) {
     try{

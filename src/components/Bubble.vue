@@ -219,6 +219,7 @@ function onBubClose() {
         background: rgba(0,0,0,0.7);
         backdrop-filter: blur(5px);
         overflow: auto;
+        z-index: 1001;
         &::after{
             opacity: 0;
         }

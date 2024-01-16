@@ -9,7 +9,7 @@
     @touchmove="onTouchMove"
     @touchend="onTouchEnd"
     :style="{
-        width: (isOpen ? bubSize*1.5 : bubSize) + 'px',
+        width: bubSize + 'px',
         height: bubSize + 'px',
         top: y + 'px',
         left: x + 'px'
@@ -171,8 +171,8 @@ function onBubOpen() {
     console.log('是点击')
     isOpen.value = true
     bubSize.value = (window.innerWidth - windowMargin.value*2) < 500 ? 350 : (window.innerWidth / 2 > 700 ? 700 : window.innerWidth / 2)
-    x.value = window.innerWidth / 2 - (bubSize.value * 1.5) / 2
-    y.value = window.innerHeight / 2 - bubSize.value  / 2
+    x.value = (window.innerWidth - bubSize.value) / 2
+    y.value = (window.innerHeight - bubSize.value)  / 2
 }
 
 function onBubClose() {
@@ -200,12 +200,12 @@ function onBubClose() {
     &.open{
         border-radius: 60px;
         animation: fade-in 300ms ease-in-out;
-        background: rgba(0,0,0,0.7);
+        background: #ea3e3c;
         backdrop-filter: blur(5px);
         overflow: auto;
         @keyframes fade-in {
             0%{
-                opacity: 0.2;
+                opacity: 0.1;
             }
             100%{
                 opacity: 1;

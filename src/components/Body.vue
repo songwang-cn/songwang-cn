@@ -10,24 +10,42 @@
       id="home"
       class="home" 
       :style="{'background-image': `url(${bgUrl})`}"
+      @mousedown="onMouseDown"
+      @mousemove="onMouseMove"
+      @mouseup="onDragEnd"
+      @touchstart="onTouchStart"
+      @touchmove="onTouchMove"
+      @touchend="onDragEnd"
     >
+      <MessageCenter 
+        :isDrag="isDrag" 
+        :height="messageCenterHeight"
+      />
+      <RandomBgTrigger />
+      <Bubble />
+      <MusicBar />
       <Header />
-        <div class="content">
-          <Bubble />
-          <MusicBar />
-          <slot />
-        </div>
+      <div class="content">
+        <slot />
+      </div>
       <Footer />
     </div>
   </template>
   
 <script setup lang="ts">
+import { ref } from 'vue';
 import Header from './Header.vue';
 import Footer from './Footer.vue';
 import { appStore } from '@/config/store';
 import { computed } from 'vue'
 import Bubble from '@/components/Bubble.vue';
 import MusicBar from '@/components/MusicBar.vue'
+import MessageCenter from './MessageCenter.vue';
+import RandomBgTrigger from './RandomBgTrigger.vue';
+import {useMessageCenter } from '@/use/UseMessageCenter'
+
+const {isDrag, messageCenterHeight, onMouseDown, onMouseMove, onTouchStart, onTouchMove, onDragEnd } = useMessageCenter()
+
 
 const bgUrl = computed(() => appStore().bgUrl)
  
@@ -35,6 +53,7 @@ const bgUrl = computed(() => appStore().bgUrl)
   
 <style lang="scss" scoped>
   .home{
+    user-select: none;
       border-radius: 10px;
       position: fixed;
       inset: 12px;

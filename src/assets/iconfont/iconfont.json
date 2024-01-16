@@ -6,6 +6,13 @@
   "description": "框架",
   "glyphs": [
     {
+      "icon_id": "22789136",
+      "name": "上拉收起",
+      "font_class": "shanglashouqi",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
       "icon_id": "1160980",
       "name": "wifi",
       "font_class": "wifi",
