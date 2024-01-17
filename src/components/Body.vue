@@ -17,6 +17,9 @@
       @touchmove="onTouchMove"
       @touchend="onDragEnd"
     >
+      <div class="content">
+        <slot />
+      </div>
       <MessageCenter 
         :isDrag="isDrag" 
         :height="messageCenterHeight"
@@ -25,9 +28,6 @@
       <Bubble />
       <MusicBar />
       <Header />
-      <div class="content">
-        <slot />
-      </div>
       <Footer />
     </div>
   </template>

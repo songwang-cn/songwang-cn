@@ -1,55 +1,52 @@
 <template>
-    {{ isOpen }}
-  <div 
-    :class="['music', isClosing && 'closing', isOpen && 'open']" 
-    @mousedown="onMouseDown" 
-    @mousemove="onMouseMove" 
-    @mouseup="onMouseUp"
-    @mouseout="onMouseOut"
-    @touchstart="onTouchStart"
-    @touchmove="onTouchMove"
-    @touchend="onTouchEnd"
-    :style="{
-        width: bubSize + 'px',
-        height: bubSize + 'px',
-        top: y + 'px',
-        left: x + 'px'
-    }"
-  >
-    <div class="music-content" :style="{opacity: isOpen ? 1 : 0}">
-        <div class="music-top">
-            <div class="music-pic" :class="isPlaying && 'playingPic'">
-                <van-image :class="isPlaying ? 'playing' : 'pause'" class="img" :src="Jay" width="65%" height="65%" />
+    <FullScreenWrapper 
+        :is-open="isOpen"
+        @close="onBubClose"
+    >
+        <div 
+            :class="['music', isClosing && 'inClosing', isOpen && 'is-open']" 
+            @mousedown="onMouseDown" 
+            @mousemove="onMouseMove" 
+            @mouseup="onMouseUp"
+            @mouseout="onMouseOut"
+            @touchstart="onTouchStart"
+            @touchmove="onTouchMove"
+            @touchend="onTouchEnd"
+            :style="{
+                width: bubSize + 'px',
+                height: bubSize + 'px',
+                top: y + 'px',
+                left: x + 'px'
+            }"
+        >
+            <div class="music-content">
+                <div class="music-top">
+                    <div  
+                        :class="[
+                            'music-pic', 
+                            isPlaying && 'playing',
+                            isOpen && 'is-open'
+                        ]" 
+                    >
+                        <van-image :class="isPlaying ? 'playing' : 'pause'" class="music_img" :src="Jay" width="65%" height="65%" />
+                    </div>
+                </div>
+                <div class="ctl" v-if="isOpen">
+                    <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onPre"/>
+                    <i :class="['music-ctrl iconfont', isPlaying ? 'icon-zanting' : 'icon-zantingbofang']" @click="onPlay"/>
+                    <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onNext" style="transform: rotate(180deg);"/>
+                </div>
             </div>
-        </div>
-        <div class="ctl">
-         <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onPre"/>
-         <i :class="['music-ctrl iconfont', isPlaying ? 'icon-zanting' : 'icon-zantingbofang']" @click="onPlay"/>
-         <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onNext" style="transform: rotate(180deg);"/>
-        </div>
-    </div>
-    <SvgIcon 
-
-
-
-
-
-
-
-    
-        v-if="!isOpen"
-        icon="icon-wangyiyunyinle"
-    />
-  </div>
+        </div> 
+    </FullScreenWrapper>
 </template>
 
 <script lang="ts" setup>
 import { ref, onMounted, nextTick } from "vue";
-import AppTable from "./AppTable.vue";
 import { DialogHelper } from "@/helper/DialogHelper";
 import Random from '@/views/random/index.vue';
-import SvgIcon from "./SvgIcon.vue";
 import Jay from "@/assets/img/Jay.png";
+import FullScreenWrapper from "./FullScreenWrapper.vue";
 
 const windowMargin = ref(window.innerWidth > 500 ? 12 : 0)
 
@@ -176,12 +173,12 @@ onMounted(() => {
         isOpen.value = false
         bubSize.value = 60
     }
-    window.addEventListener('click', (e) => {
-        console.log(e)
+   /*  window.addEventListener('click', (e) => {
+        console.log('click', e)
         if(isOpen.value && !e.target?.className.includes('music')){
             onBubClose()
         }
-    })
+    }) */
 })
 
 function onBubOpen() {
@@ -199,9 +196,7 @@ function onBubClose() {
     bubSize.value = 60
     x.value = lastX.value  
     y.value = lastY.value
-    setTimeout(() => {
         isOpen.value = false
-    }, 100)
 }
 
 const isPlaying = ref(false)
@@ -221,29 +216,17 @@ function onNext() {
 </script>
 
 <style lang="scss" scoped>
+
 .music{
     user-select: none;
     position: absolute;
-    z-index: 1000;
-    border-radius: 20%;
+    border-radius: 10%;
     cursor: pointer;
-    &.closing{
+    &.inClosing{
         transition: 300ms all ease-in-out;
     }
-    &.open{
-        border-radius: 40px;
-        animation: fade-in 300ms ease-in-out;
+    &.is-open{
         background: #ea3e3c;
-        backdrop-filter: blur(5px);
-        overflow: auto;
-        @keyframes fade-in {
-            0%{
-                opacity: 0;
-            }
-            100%{
-                opacity: 1;
-            }
-        }
     }
 
     .music-content{
@@ -257,20 +240,21 @@ function onNext() {
             align-items: center;
            
             .music-pic{
-                width: 60%;
-                height: 60%;
-                margin: 10% auto;
+                width: 100%;
+                height: 100%;
                 background: url('@/assets/img/music-bg.png');
                 background-size: 100% 100%;
                 position: relative;
                 border-radius: 100%;
                 box-shadow: 0 0 20px rgba(0,0,0,.8);
+                transition: 500ms all ease-in-out;
+                transition-delay: 100ms;
                 &::after{
                     content: '';
                     position: absolute;
                     inset: 0;
-                    margin: -10px auto;
-                    width: 10px;
+                    margin: -5% auto;
+                    width: 5%;
                     height: 50%;
                     opacity: 0;
                     border-radius: 20px;
@@ -280,13 +264,19 @@ function onNext() {
                     transform: rotate(-90deg);
                 }
 
-                &.playingPic{
+                &.is-open{
+                    margin: 10% auto;
+                    width: 60%;
+                    height: 60%;
+                }
+
+                &.playing{
                     &::after{
                         opacity: 1;
                         transform: rotate(-50deg);
                     }
                 }
-                .img{   
+                .music_img{   
                     overflow: hidden;
                     border-radius: 100%; 
                     animation: ring infinite 10s linear;
@@ -296,26 +286,25 @@ function onNext() {
                     animation-delay: 600ms;
                     &::after{
                         content: '';
-                        border-radius: 20px;
-                        width: 20px;
-                        height: 20px;
-                        position: absolute;
-                        background: #000000;
                         inset: 0;
+                        width: 20%;
+                        height: 20%;
                         margin: auto;
+                        position: absolute;
+                        border-radius: 100%;
+                        background: #000000;
                         box-shadow: 0 0 20px #acacac;
                     }
+                    &.playing{
+                        box-shadow: 0 0 20px #929292;
+                        animation-play-state: running;
+                    }
+                    &.pause{
+                        box-shadow: none;
+                        animation-play-state: paused;
+                    } 
                 }
 
-                .playing{
-                    box-shadow: 0 0 20px #929292;
-                    animation-play-state: running;
-                }
-                .pause{
-                    box-shadow: none;
-                    animation-play-state: paused;
-                } 
-               
                 @keyframes ring {
                     0%{
                         transform: rotate(0deg);
@@ -328,12 +317,12 @@ function onNext() {
         }
         .ctl{
             position: absolute;
-            bottom: 10%;
+            bottom: 8%;
             width: 100%;
             display: flex;
             justify-content: space-evenly;
             .iconfont{
-                font-size: 22px;
+                font-size: 30px;
                 color: #fff;
             }
         }

@@ -1,22 +1,27 @@
 <template>
-  <div 
-    :class="['bubble', isEnding && 'ending', isOpen && 'open']" 
-    @mousedown="onMouseDown" 
-    @mousemove="onMouseMove" 
-    @mouseup="onMouseUp"
-    @mouseout="onMouseOut"
-    @touchstart="onTouchStart"
-    @touchmove="onTouchMove"
-    @touchend="onTouchEnd"
-    :style="{
-        width: bubSize + 'px',
-        height: bubSize + 'px',
-        top: y + 'px',
-        left: x + 'px'
-    }"
-  >
-    <AppTable class="bubble-list" v-if="isOpen" :list="appList"/>
-  </div>
+    <FullScreenWrapper 
+        :is-open="isOpen" 
+        @close="onClose"
+    >
+        <div 
+            :class="['bubble', isEnding && 'ending', isOpen && 'open']" 
+            @mousedown="onMouseDown" 
+            @mousemove="onMouseMove" 
+            @mouseup="onMouseUp"
+            @mouseout="onMouseOut"
+            @touchstart="onTouchStart"
+            @touchmove="onTouchMove"
+            @touchend="onTouchEnd"
+            :style="{
+                width: bubSize + 'px',
+                height: bubSize + 'px',
+                top: y + 'px',
+                left: x + 'px'
+            }"
+        >
+            <AppTable class="bubble-list" v-if="isOpen" :list="appList"/>
+        </div>
+    </FullScreenWrapper>
 </template>
 
 <script lang="ts" setup>
@@ -24,6 +29,7 @@ import { ref, onMounted, nextTick } from "vue";
 import AppTable from "./AppTable.vue";
 import { DialogHelper } from "@/helper/DialogHelper";
 import Random from '@/views/random/index.vue';
+import FullScreenWrapper from "./FullScreenWrapper.vue";
 
 const windowMargin = ref(window.innerWidth > 500 ? 12 : 0)
 
@@ -97,7 +103,7 @@ function onMouseUp() {
 
     if(Date.now() - startTime.value < 200 && !isOpen.value) {
         console.log('open')
-        onBubOpen()
+        onOpen()
     }
 }
 
@@ -150,15 +156,9 @@ onMounted(() => {
         isOpen.value = false
         bubSize.value = 60
     }
-    window.addEventListener('click', (e) => {
-        console.log(e)
-        if(isOpen.value && !e.target?.className.includes('bubble')){
-            onBubClose()
-        }
-    })
 })
 
-function onBubOpen() {
+function onOpen() {
     lastX.value = x.value
     lastY.value = y.value
     isOpen.value = true
@@ -168,14 +168,12 @@ function onBubOpen() {
     y.value = window.innerHeight / 2 - bubSize.value  / 2
 }
 
-function onBubClose() {
+function onClose() {
     bubSize.value = 60
     x.value = lastX.value  
     y.value = lastY.value
-    setTimeout(() => {
-        isOpen.value = false
-        isDraging.value = false
-    }, 100)
+    isOpen.value = false
+    isDraging.value = false
 }
 
 </script>
@@ -184,7 +182,6 @@ function onBubClose() {
 .bubble{
     user-select: none;
     position: absolute;
-    z-index: 1000;
     border-radius: 20%;
     cursor: pointer;
     background-color: rgba(110, 110, 110, 0.6);
@@ -216,7 +213,7 @@ function onBubClose() {
     &.open{
         border-radius: 10%;
         animation: fade-in 300ms ease-in-out;
-        background: rgba(0,0,0,0.7);
+        background: #ccc;
         backdrop-filter: blur(5px);
         overflow: auto;
         z-index: 1001;
