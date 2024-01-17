@@ -29,6 +29,7 @@
                         ]" 
                     >
                         <van-image :class="isPlaying ? 'playing' : 'pause'" class="music_img" :src="Jay" width="65%" height="65%" />
+                        <div class="mask"/>
                     </div>
                 </div>
                 <div class="ctl" v-if="isOpen">
@@ -223,7 +224,7 @@ function onNext() {
     border-radius: 10%;
     cursor: pointer;
     &.inClosing{
-        transition: 300ms all ease-in-out;
+        transition: 500ms all ease-in-out;
     }
     &.is-open{
         background: #ea3e3c;
@@ -247,8 +248,7 @@ function onNext() {
                 position: relative;
                 border-radius: 100%;
                 box-shadow: 0 0 20px rgba(0,0,0,.8);
-                transition: 500ms all ease-in-out;
-                transition-delay: 100ms;
+                transition: 400ms all ease-in-out;
                 &::after{
                     content: '';
                     position: absolute;
@@ -303,6 +303,11 @@ function onNext() {
                         box-shadow: none;
                         animation-play-state: paused;
                     } 
+                }
+
+                .mask{
+                    position: absolute;
+                    inset: 0;
                 }
 
                 @keyframes ring {

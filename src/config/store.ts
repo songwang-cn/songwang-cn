@@ -1,15 +1,16 @@
 import { defineStore } from 'pinia'
+import { BgType } from '@/enum'
 
 export const appStore = defineStore('app' ,{
     state: () => ({
-        bgType: localStorage.getItem('bgType') || 'system',
+        bgType: localStorage.getItem('bgType') || BgType.SYSTEM,
         theme: localStorage.getItem('theme') || 'light',
         bgUrl: localStorage.getItem('bgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href,
         lastBgUrl: localStorage.getItem('lastBgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href,
     }),
     actions: {
-        changeBgType(){
-            this.bgType = this.bgType === 'system' ? 'random' : 'system'
+        changeBgType(type: BgType){
+            this.bgType = type
             localStorage.setItem('bgType', this.bgType)
         },
         changeTheme(){

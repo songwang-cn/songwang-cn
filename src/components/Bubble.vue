@@ -182,6 +182,7 @@ function onClose() {
 .bubble{
     user-select: none;
     position: absolute;
+    z-index: 1000;
     border-radius: 20%;
     cursor: pointer;
     background-color: rgba(110, 110, 110, 0.6);
@@ -208,7 +209,7 @@ function onClose() {
         transition: 300ms;
     }
     &.ending{
-        transition: 300ms all ease-in-out;
+        transition: 400ms all ease-in-out;
     }
     &.open{
         border-radius: 10%;

@@ -15,8 +15,8 @@
             </van-cell>
             <van-cell title="网络壁纸">
                 <van-switch 
-                    active-value="random"
-                    inactive-value="system" 
+                    :active-value="BgType.RANDOM"
+                    :inactive-value="BgType.SYSTEM" 
                     v-model="bgType" 
                     @change="bgTypeChange"
                 />
@@ -39,13 +39,14 @@ import Dialog from '@/components/Dialog.vue'
 import { appStore } from '@/config/store'
 import { showToast  } from 'vant';
 import { UseRandomBg } from '@/use/UseRandomBg'
+import { BgType } from '@/enum'
 
 const allWallPaper = import.meta.glob('../../assets/img/wallPaper/*.*', {eager: true})
 
 const bgType = ref(appStore().bgType)
 
 async function bgTypeChange() {
-    appStore().changeBgType()
+    appStore().changeBgType(bgType.value as BgType)
     if(bgType.value === 'random') {
         UseRandomBg()
     }else{
@@ -64,12 +65,9 @@ function themeChange() {
 }
 
 function onChangeSystemBg(item: any) {
-    if(appStore().bgType === 'random'){
-        appStore().changeBgType()
-        bgType.value = appStore().bgType
-    }
+    appStore().changeBgType(BgType.SYSTEM)
+    bgType.value = BgType.SYSTEM
     try{
-
         appStore().setBgUrl(new URL(item.default, import.meta.url).href)
         showToast ({ 
             type: 'success', 

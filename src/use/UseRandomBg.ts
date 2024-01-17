@@ -2,6 +2,7 @@
 import { showToast } from 'vant'
 import { appStore } from '@/config/store'
 import { nextTick } from 'vue'
+import { BgType } from '@/enum'
 
 export async function UseRandomBg() {
     showToast({
@@ -17,6 +18,7 @@ export async function UseRandomBg() {
     return new Promise((resolve) => {
       img.onload = () => {
         appStore().setBgUrl(json.data.rawSrc)
+        appStore().changeBgType(BgType.RANDOM)
         resolve(json.data.rawSrc)
         showToast().close()
         nextTick(() => {

@@ -2,17 +2,17 @@ import  {ref} from 'vue'
 
 export function UseTime() {
    
-    const YY = ref(0)
+    const YY = ref('')
 
-    const MM = ref(0)
+    const MM = ref('')
 
-    const DD = ref(0)
+    const DD = ref('')
 
-    const HH = ref(0)
+    const HH = ref('')
 
-    const mm = ref(0)
+    const mm = ref('')
 
-    const ss = ref(0)
+    const ss = ref('')
 
     const chineseWeekString = ['日', '一', '二', '三', '四', '五', '六']
 
@@ -23,21 +23,25 @@ export function UseTime() {
     function updateTime() {
         const date = new Date()
 
-        YY.value = date.getFullYear()
+        YY.value = date.getFullYear()+''
 
-        MM.value = date.getMonth() + 1
+        MM.value = getFillString(date.getMonth() + 1)
 
-        DD.value = date.getDate()
+        DD.value = getFillString(date.getDate())
 
         leftString.value = date.getHours() >= 12 ? '下午' : '上午'
 
-        HH.value = date.getHours()
+        HH.value = getFillString(date.getHours())
 
-        mm.value = date.getMinutes()
+        mm.value = getFillString(date.getMinutes())
 
-        ss.value = date.getSeconds()
+        ss.value = getFillString(date.getSeconds())
 
         WEEK.value = '星期'+ chineseWeekString[date.getDay()]
+    }
+
+    function getFillString(num: number):string {
+        return num > 10 ? num+'' : '0' + num
     }
 
     updateTime()
