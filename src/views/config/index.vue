@@ -1,6 +1,6 @@
 <template>
     <Dialog title="系统设置">
-        <van-cell-group>
+        <van-cell-group >
             <van-cell title="系统壁纸">
                 <template #value>
                     <div 
@@ -9,7 +9,9 @@
                         v-for="item of allWallPaper"
                         @click="onChangeSystemBg(item)"
                     >
-                        <van-image width="100%" height="100%" :src="(item as any).default" fit="cover"/>
+                        <lazy-component>
+                            <img v-lazy="item" class="" :src="(item as any).default" fit="cover"/>
+                        </lazy-component>
                     </div>
                 </template>
             </van-cell>
@@ -29,6 +31,7 @@
                     @change="themeChange"
                 />
             </van-cell>
+            <van-cell title="重新启动" is-link @click="AppConfig.router.push('/')"/>
         </van-cell-group>
     </Dialog>
 </template>
@@ -37,9 +40,10 @@
 import { ref } from 'vue'
 import Dialog from '@/components/Dialog.vue'
 import { appStore } from '@/config/store'
-import { showToast  } from 'vant';
+import { Lazyload, showToast  } from 'vant';
 import { UseRandomBg } from '@/use/UseRandomBg'
 import { BgType } from '@/enum'
+import AppConfig from '@/config/appConfig';
 
 const allWallPaper = import.meta.glob('../../assets/img/wallPaper/*.*', {eager: true})
 
@@ -85,11 +89,14 @@ function onChangeSystemBg(item: any) {
 <style lang="scss" scoped>
 :deep(.van-cell){
     padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
     .van-cell__title{
         flex: 0;
         min-width: 20%;
         display: flex;
         align-items: center;
+        justify-content: space-around;
     }
 
     @media screen and (max-width: 501px) {
@@ -112,6 +119,10 @@ function onChangeSystemBg(item: any) {
         transition: 200ms all ease-in-out;
         &:hover{
             transform: scale(1.1);
+        }
+        img{
+            width: 100%;
+            height: 100%;
         }
     }
 

@@ -1,10 +1,3 @@
-<!--
- * @Author: songwang 112054945@qq.com
- * @Date: 2023-08-23 13:24:39
- * @LastEditors: Do not edit
- * @LastEditTime: 2023-08-23 16:42:55
- * @FilePath: \VueJS\src\components\Body.vue
--->
 <template>
     <div 
       id="home"
@@ -18,7 +11,7 @@
       @touchend="onDragEnd"
     >
       <div class="content">
-        <slot />
+        <Home />
       </div>
       <MessageCenter 
         :isDrag="isDrag" 
@@ -43,20 +36,23 @@ import MusicBar from '@/components/MusicBar.vue'
 import MessageCenter from './MessageCenter.vue';
 import RandomBgTrigger from './RandomBgTrigger.vue';
 import {useMessageCenter } from '@/use/UseMessageCenter'
+import Home from '@/views/home/index.vue';
+import AppConfig from '@/config/appConfig';
 
 const {isDrag, messageCenterHeight, onMouseDown, onMouseMove, onTouchStart, onTouchMove, onDragEnd } = useMessageCenter()
 
 
 const bgUrl = computed(() => appStore().bgUrl)
+
  
 </script>
   
 <style lang="scss" scoped>
   .home{
     user-select: none;
-      border-radius: 10px;
+      border-radius: 20px;
       position: fixed;
-      inset: 12px;
+      inset: var(--window-margin);
       display: flex;
       background-size: cover;
       background-position: center center;

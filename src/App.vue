@@ -1,8 +1,6 @@
 <template>
   <van-config-provider :theme="(appStore().theme as any)">
-    <Body>
-      <router-view />
-    </Body>
+    <router-view />
   </van-config-provider>
 </template>
 

@@ -9,42 +9,21 @@ import { createRouter, createWebHistory,createWebHashHistory, RouteRecordRaw } f
 
 
 export const routes: Array<RouteRecordRaw> = [
+    
     {
         path: '/',
-        name: 'Home',
-        component: () => import('../views/home/index.vue'),
+        name: 'Load',
+        component: () => import('../views/load/index.vue'),
         meta: {
-            title: '首页',
+            title: '资源加载页',
             icon: 'icon-shouye-zhihui'
-        }
+        },
     },
     {
-        path: '/random',
-        name: 'Random',
-        component: () => import('../views/random/index.vue'),
-        meta: {
-            title: '随机',
-            icon: 'icon-suijishushengcheng'
-        }
+        path: '/home',
+        name: 'Home',
+        component: () => import('../components/Body.vue'),
     },
-/*     {
-        path: '/bio',
-        name: 'Bio',
-        component: () => import('../views/biographical/index.vue'),
-        meta: {
-            title: '简历',
-            icon: 'icon-wodejianli'
-        }
-    }, */
-    {
-        path: '/note',
-        name: 'Note',
-        component: () => import('../views/note/index.vue'),
-        meta: {
-            title: '笔记',
-            icon: 'icon-a-bijibenbiji'
-        }
-    }
 ]
 
 const router = createRouter({

@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted } from "vue";
 import AppTable from "./AppTable.vue";
 import { DialogHelper } from "@/helper/DialogHelper";
 import Random from '@/views/random/index.vue';

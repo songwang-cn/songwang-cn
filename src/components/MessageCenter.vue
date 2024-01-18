@@ -47,7 +47,7 @@ defineProps({
     top: 0;
     left: 0;
     background: rgba(138, 138, 138, 0.95);
-    z-index: 2000;
+    z-index: 99999;
     overflow: hidden;
     display: flex;
     flex-direction: column;

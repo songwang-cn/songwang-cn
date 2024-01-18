@@ -9,11 +9,14 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import { ConfigProvider } from 'vant';
 import 'swiper/css';
-
+import { Lazyload } from 'vant'
 AppConfig.router = router
 
 createApp(App)
     .use(Vant)
+    .use(Lazyload, {
+        lazyComponent: true,
+    })
     .use(router)
     .use(ConfigProvider)
     .use(createPinia())

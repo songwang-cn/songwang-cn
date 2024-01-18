@@ -6,6 +6,20 @@
   "description": "框架",
   "glyphs": [
     {
+      "icon_id": "14151877",
+      "name": "重启",
+      "font_class": "zhongqi",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "2075064",
+      "name": "ios",
+      "font_class": "ios",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
       "icon_id": "7156146",
       "name": "暂停",
       "font_class": "zanting",

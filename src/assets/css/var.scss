@@ -1,1 +1,7 @@
-$bg: var(--bg, #fff);
+:root {
+    --window-margin: 20px;
+}
+
+:export {
+    windowMargin: --window-margin
+}
