@@ -9,10 +9,10 @@
   <Panel>
     <Swiper pagination>
       <SwiperSlide>
-        <Page1 />
+        <AppTable :list="appList1" />
       </SwiperSlide>
       <SwiperSlide>
-        <Page2 />
+        <AppTable :list="appList2" />
       </SwiperSlide>
       <SwiperSlide>
         <Note />
@@ -22,11 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import Panel from '@/components/Panel.vue';
-import { Swiper, SwiperSlide } from 'swiper/vue';
+import {ref} from 'vue'
 import Note from '@/views/note/index.vue';
-import Page1 from './page1.vue';
-import Page2 from './page2.vue';
+import Panel from '@/components/Panel.vue';
+import AppConfig from '@/config/appConfig';
+import AppTable from '@/components/AppTable.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+const appList1 = ref(AppConfig.allAppList.slice(0, 4))
+
+const appList2 = ref(AppConfig.allAppList.slice(4, 5))
 
 </script>
 

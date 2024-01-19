@@ -6,9 +6,7 @@
         <div 
             :class="['music', isClosing && 'inClosing', isOpen && 'is-open']" 
             @mousedown="onMouseDown" 
-            @mousemove="onMouseMove" 
             @mouseup="onMouseUp"
-            @mouseout="onMouseOut"
             @touchstart="onTouchStart"
             @touchmove="onTouchMove"
             @touchend="onTouchEnd"
@@ -49,7 +47,7 @@ import Random from '@/views/random/index.vue';
 import Jay from "@/assets/img/Jay.png";
 import FullScreenWrapper from "./FullScreenWrapper.vue";
 
-const windowMargin = ref(window.innerWidth > 500 ? 12 : 0)
+const windowMargin = ref(0)
 
 //纵向吸附阈值
 const adsorPintDistanceY = ref(20)
@@ -88,6 +86,10 @@ const lastY = ref(y.value)
 
 const startTime = ref(0)
 
+onMounted(() => {
+    document.body.addEventListener('mousemove', onMouseMove)
+})
+
 
 function onMouseDown(e: MouseEvent) {
     startTime.value = Date.now()
@@ -100,12 +102,6 @@ function onMouseMove(e: MouseEvent) {
         x.value = e.clientX-bubSize.value/2 
         y.value = e.clientY-bubSize.value/2 
     } 
-}
-
-function onMouseOut() {
-    if(!isOpen.value){
-        onMouseUp()
-    }
 }
 
 function onMouseUp() {

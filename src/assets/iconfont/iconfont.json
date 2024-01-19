@@ -6,6 +6,34 @@
   "description": "框架",
   "glyphs": [
     {
+      "icon_id": "4902387",
+      "name": "分割线",
+      "font_class": "PartingLine",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "941656",
+      "name": "最小化",
+      "font_class": "zuixiaohua",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "9772048",
+      "name": "mac关闭",
+      "font_class": "macguanbi",
+      "unicode": "e679",
+      "unicode_decimal": 59001
+    },
+    {
+      "icon_id": "27515538",
+      "name": "screen_full_mac 全屏",
+      "font_class": "a-screen_full_macquanping",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
       "icon_id": "14151877",
       "name": "重启",
       "font_class": "zhongqi",

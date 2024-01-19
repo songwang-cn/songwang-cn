@@ -1,8 +1,11 @@
 <template>
     <div 
       id="home"
+      :key="homeKey"
       class="home" 
-      :style="{'background-image': `url(${bgUrl})`}"
+      :style="{
+        'background-image': `url(${bgUrl})`
+      }"
       @mousedown="onMouseDown"
       @mousemove="onMouseMove"
       @mouseup="onDragEnd"
@@ -15,7 +18,7 @@
       </div>
       <MessageCenter 
         :isDrag="isDrag" 
-        :height="messageCenterHeight"
+        :bottom="bottom"
       />
       <RandomBgTrigger />
       <Bubble />
@@ -26,7 +29,7 @@
   </template>
   
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Header from './Header.vue';
 import Footer from './Footer.vue';
 import { appStore } from '@/config/store';
@@ -37,12 +40,20 @@ import MessageCenter from './MessageCenter.vue';
 import RandomBgTrigger from './RandomBgTrigger.vue';
 import {useMessageCenter } from '@/use/UseMessageCenter'
 import Home from '@/views/home/index.vue';
-import AppConfig from '@/config/appConfig';
 
-const {isDrag, messageCenterHeight, onMouseDown, onMouseMove, onTouchStart, onTouchMove, onDragEnd } = useMessageCenter()
+const {isDrag, bottom, onMouseDown, onMouseMove, onTouchStart, onTouchMove, onDragEnd } = useMessageCenter()
 
+const homeKey = ref(0)
 
 const bgUrl = computed(() => appStore().bgUrl)
+
+onMounted(() => {
+  window.onresize = () => {
+    homeKey.value = Date.now()
+    console.log('resize')
+  }
+})
+
 
  
 </script>
@@ -50,33 +61,23 @@ const bgUrl = computed(() => appStore().bgUrl)
 <style lang="scss" scoped>
   .home{
     user-select: none;
-      border-radius: 20px;
-      position: fixed;
-      inset: var(--window-margin);
-      display: flex;
-      background-size: cover;
-      background-position: center center;
-      background-color: rgba($color: #000000, $alpha: 0.5);
-      overflow: hidden;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: 400ms all ease-in-out;
+    .content{
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
-      transition: 400ms all ease-in-out;
-      .content{
-        flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-        display: flex;
-        flex-direction: column;
-      }
-    }
-
-    @media screen and (max-width: 501px) {
-      .home{
-        position: relative;
-        inset: 0;
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
     }
   }
 

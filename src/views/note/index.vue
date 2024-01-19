@@ -32,12 +32,12 @@ const searchVal = ref('')
 
 const allFile = import.meta.glob('../../assets/my/*.*', {eager: true})
 
-console.log(allFile)
+// console.log(allFile)
 
 const allfileList = ref([] as any[])
 
 for(let key in allFile){
-  console.log(allFile[key])
+  // console.log(allFile[key])
   allfileList.value.push({
     title: key.split('/').pop()?.split('.').shift(),
     path: (allFile[key] as any).default

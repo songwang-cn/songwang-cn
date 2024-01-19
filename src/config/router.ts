@@ -1,10 +1,3 @@
-/*
- * @Author: songwang 112054945@qq.com
- * @Date: 2023-08-21 10:48:48
- * @LastEditors: Do not edit
- * @LastEditTime: 2023-09-07 15:33:47
- * @FilePath: \Vue3vite\src\config\router.ts
- */
 import { createRouter, createWebHistory,createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
 

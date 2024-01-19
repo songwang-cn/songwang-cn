@@ -9,9 +9,7 @@
                         v-for="item of allWallPaper"
                         @click="onChangeSystemBg(item)"
                     >
-                        <lazy-component>
-                            <img v-lazy="item" class="" :src="(item as any).default" fit="cover"/>
-                        </lazy-component>
+                        <img :src="(item as any).default" fit="cover"/>
                     </div>
                 </template>
             </van-cell>
@@ -93,7 +91,7 @@ function onChangeSystemBg(item: any) {
     justify-content: space-between;
     .van-cell__title{
         flex: 0;
-        min-width: 20%;
+        min-width: 100px;
         display: flex;
         align-items: center;
         justify-content: space-around;
@@ -127,17 +125,16 @@ function onChangeSystemBg(item: any) {
     }
 
     .isThis{
-        box-shadow: 0 0 0 3px rgba(0,0,0,.3);
         position: relative;
         &::after{
             content: '当前';
             color: #fff;
-            font-size: 14px;
+            font-size: 12px;
             line-height: 50px;
             text-align: center;
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,.3);
+            background: rgba(0,0,0,.4);
         }
     }
 

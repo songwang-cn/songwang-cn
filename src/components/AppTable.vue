@@ -1,14 +1,13 @@
 <template>
-    <div class="list">
+    <div 
+      class="list" 
+    >
         <div 
             :class="['card']" 
             v-for="card of list" 
-            @click="card.action && card.action()"
         >
             <SvgIcon 
-                :icon="card.icon" 
-                :is-svg="card.isSvg" 
-                :name="card.name"
+                :config="card"
                 show-name
             />
         </div>
@@ -30,7 +29,7 @@ defineProps({
 <style lang="scss" scoped>
  .list{
     flex: 1;
-    padding-top: 40px;
+    padding:40px 30px;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -59,7 +58,7 @@ defineProps({
 
        @media screen and (max-width: 501px) {
           .list{
-            padding-top: 10px;
+            padding: 10px;
           }
        }
 </style>

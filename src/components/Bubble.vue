@@ -6,9 +6,7 @@
         <div 
             :class="['bubble', isEnding && 'ending', isOpen && 'open']" 
             @mousedown="onMouseDown" 
-            @mousemove="onMouseMove" 
             @mouseup="onMouseUp"
-            @mouseout="onMouseOut"
             @touchstart="onTouchStart"
             @touchmove="onTouchMove"
             @touchend="onTouchEnd"
@@ -16,7 +14,7 @@
                 width: bubSize + 'px',
                 height: bubSize + 'px',
                 top: y + 'px',
-                left: x + 'px'
+                left: x + 'px',
             }"
         >
             <AppTable class="bubble-list" v-if="isOpen" :list="appList"/>
@@ -31,7 +29,7 @@ import { DialogHelper } from "@/helper/DialogHelper";
 import Random from '@/views/random/index.vue';
 import FullScreenWrapper from "./FullScreenWrapper.vue";
 
-const windowMargin = ref(window.innerWidth > 500 ? 12 : 0)
+const windowMargin = ref(0)
 
 //纵向吸附阈值
 const adsorPintDistanceY = ref(20)
@@ -77,17 +75,15 @@ function onMouseDown(e: MouseEvent) {
     isEnding.value = false
 }
 
+onMounted(() => {
+    document.body.addEventListener('mousemove', onMouseMove)
+})
+
 function onMouseMove(e: MouseEvent) {
     if(isDraging.value && !isOpen.value){
         x.value = e.clientX-bubSize.value/2 
         y.value = e.clientY-bubSize.value/2 
     } 
-}
-
-function onMouseOut() {
-    if(!isOpen.value){
-        onMouseUp()
-    }
 }
 
 function onMouseUp() {
@@ -163,7 +159,7 @@ function onOpen() {
     lastY.value = y.value
     isOpen.value = true
     console.log('是点击')
-    bubSize.value = (window.innerWidth - windowMargin.value*2) < 500 ? 350 : (window.innerWidth / 2 > 700 ? 700 : window.innerWidth / 2)
+    bubSize.value = (window.innerWidth - windowMargin.value*2) < 500 ? 350 : (window.innerWidth / 2 > 600 ? 600 : window.innerWidth / 2)
     x.value = window.innerWidth / 2 - bubSize.value / 2
     y.value = window.innerHeight / 2 - bubSize.value  / 2
 }

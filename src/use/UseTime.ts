@@ -41,7 +41,7 @@ export function UseTime() {
     }
 
     function getFillString(num: number):string {
-        return num > 10 ? num+'' : '0' + num
+        return num >= 10 ? num+'' : '0' + num
     }
 
     updateTime()

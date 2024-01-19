@@ -3,6 +3,8 @@
     :class="['message-center', !isDrag && 'over']"
     :style="{
         height: height + 'px',
+        bottom: bottom + 'px',
+        opacity: bottom < height ? 1 : 0
     }"
   >
     <div class="time">
@@ -27,8 +29,10 @@ const {MM, DD, HH, mm, WEEK} = UseTime()
 
 const List = ref()
 
+const height = ref(window.innerHeight)
+
 defineProps({
-    height:{
+    bottom:{
         type: Number,
         default: 0,
     },
@@ -44,9 +48,8 @@ defineProps({
 .message-center{
     position: absolute;
     width: 100%;
-    top: 0;
     left: 0;
-    background: rgba(138, 138, 138, 0.95);
+    background: rgba(168, 168, 168, 0.95);
     z-index: 99999;
     overflow: hidden;
     display: flex;

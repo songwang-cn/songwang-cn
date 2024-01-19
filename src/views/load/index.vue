@@ -11,7 +11,11 @@
         />
       </div>
     </div>
-    <div class="load-finish" v-else>
+    <div 
+      v-else
+      class="load-finish"
+      :style="{'background-image': `url(${appStore().bgUrl})`}"
+     >
       <div class="inner">
         <div class="center">
           <div class="head">
@@ -27,7 +31,7 @@
         <div class="action">
           <div class="item"  @click="reload">
             <i class="iconfont icon-zhongqi" />
-            <span>重新启动</span>
+            <div>重新启动</div>
           </div>
         </div>
       </div>
@@ -41,6 +45,7 @@ import {ref,nextTick, onActivated, onUnmounted } from "vue"
 import AppConfig from "@/config/appConfig"
 import headIcon from '@/assets/img/Jay.png'
 import { showToast } from "vant"
+import { appStore } from '@/config/store';
 
 const allWallPaper = import.meta.glob('../../assets/img/wallPaper/*.*', {eager: true})
 
@@ -162,7 +167,8 @@ function onLogin() {
     .load-finish{
       position: absolute;
       inset: 0;
-      background-image: url("@/assets/img/wallPaper/2.png");
+      background-size: cover;
+      background-position: center center;
       .inner{
         width: 100%;
         height: 100%;
@@ -174,7 +180,7 @@ function onLogin() {
 
         @keyframes light-in{
           0%{
-            background-color: rgba(0,0,0,.8);
+            background-color: rgba(0,0,0,.6);
           }
           100%{
             background-color: rgba(0,0,0,.3);
@@ -216,7 +222,7 @@ function onLogin() {
               width: 36px;
               height: 36px;
               position: absolute;
-              right: -40px;
+              right: -45px;
               background: rgba(255,255,255,.2);
               border-radius: 100%;
               display: flex;
@@ -238,10 +244,30 @@ function onLogin() {
             }
           }
 
+          @media screen and (max-width: 500px){
+            .head{
+              width: 80px;
+              height: 80px;
+            }
+                    .inp{
+                      .login{
+                          width: 50px;
+                          height: 50px;
+                          position: absolute;
+                          left: 0;
+                          right: 0;
+                          margin: 0 auto;
+                          background-color: rgba(255,255,255,.2);
+                          bottom: -100px;
+                          color: #fff;
+                      }
+                  }
+            }
+
           @keyframes fade-scale-in{
             0%{
-              opacity: .4;
-              transform: scale(.8);
+              opacity: 0;
+              transform: scale(.9);
             }
             100%{
               opacity: 1;
@@ -262,6 +288,7 @@ function onLogin() {
           justify-content:space-around;
 
           .item{
+            height: 28px;
             padding: 10px;
             display: flex;
             flex-direction: column;
@@ -272,18 +299,21 @@ function onLogin() {
             transition: 400ms;
             border-radius: 10px;
             cursor: pointer;
+            transition: 200ms;
+            overflow: hidden;
             .iconfont{
-              font-size: 30px;
+              font-size: 26px;
               padding: 5px 20px;
-              animation: ring 2s linear infinite;
+              animation: ring 2.5s linear infinite;
               animation-play-state: paused;
             }
 
             &:hover{
               background: rgba(255,255,255,.1);
+              height: 60px;
               .iconfont{
                 animation-play-state: running;
-              }
+              } 
             }
 
             @keyframes ring{
@@ -299,17 +329,5 @@ function onLogin() {
         }
       }
     }
-}
-
-@media screen and (max-width: 500){
-  .load{
-    .center{
-      width: 100%;
-      height: 100%;
-      .iconfont{
-        font-size: 30px
-      }
-    }
-  }
 }
 </style>

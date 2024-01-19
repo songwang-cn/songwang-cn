@@ -1,33 +1,31 @@
 <template>      
-    <FullScreenWrapper
-        is-open
-        @mouseup="onMouseUp"
-        @mousemove="onMouseMove"
-        @close="closeHandler()"
-        :class="isClosing && 'closing'"
-        :show-bg="false"
-    >
         <div 
             ref="main" 
-            class="main"
+            :class="`main ${dialogKey} ${isClosing ? 'closing' : 'opening'} ${isFullScreen && 'fullscreen'}`"
+            @mousedown="onThisDialog"
             :style="{
                 background: appStore().theme === 'light' ? '#fff' : '#1c1c1e',
                 color: appStore().theme === 'light' ? '#111' : '#fff',
                 height: height + 'px',
                 width: width + 'px',
                 top: posY + 'px',
-                left: posX + 'px'
+                left: posX + 'px',
+                zIndex
             }"
         >
             <div 
                 class="dialog_top"
                 @mousedown="onMouseDown"
                 :style="{
-                    cursor: isDraging ? 'grabbing' : 'grab'
+                    backgroundColor: appStore().theme === 'light' ? '#f1f1f1' : '#1c1c1e',
+                    borderColor: appStore().theme === 'light' ? '#ddd' : '#1c1c1e',
+                    // cursor: isDraging ? 'grabbing' : 'grab'
                 }"
             >
                 <div class="left">
-                    <i @click.self="closeHandler()" class="back iconfont icon-arrow-left" />
+                    <i @click.self="closeHandler()" :class="`iconfont ${isPc ? 'close icon-macguanbi' : 'm_close icon-arrow-left'}`" />
+                    <i v-if="isPc" @click.self="closeHandler()" class="mini iconfont icon-zuixiaohua" />
+                    <i v-if="isPc" @click.self="onFullScreen()" class="full iconfont icon-a-screen_full_macquanping" />
                 </div>
                 <div class="title">{{ title }}</div>
                 <div class="right">
@@ -49,13 +47,15 @@
                 </slot>
             </div>
         </div>
-    </FullScreenWrapper>
 </template>
 
 <script lang="ts" setup>
 import { appStore } from "@/config/store";
 import { computed, ref } from "vue";
-import FullScreenWrapper from "./FullScreenWrapper.vue";
+import { onMounted } from "vue";
+import { UseIsPc } from "@/use/UseIsPc";
+
+const { isPc } = UseIsPc();
 
 const props = defineProps({
     title: {
@@ -85,18 +85,54 @@ const props = defineProps({
 
 })
 
+const dialogKey = ref(Date.now()+'')
+
+localStorage.setItem('topDialogKey', dialogKey.value)
+
+const zIndex = ref(999)
+
+function onThisDialog() {
+    const topDialogKey = localStorage.getItem('topDialogKey')
+    if(dialogKey.value !== topDialogKey) {
+        zIndex.value++
+        localStorage.setItem('topDialogKey', dialogKey.value)
+    }
+}
+
+onMounted(() => {
+    document.body.addEventListener('mousemove', onMouseMove)
+    document.body.addEventListener('mouseup', onMouseUp)
+})
+
 const isClosing = ref(false)
 
 function closeHandler() {
     isClosing.value = true
     setTimeout(() => {
         props.onClose()
-    }, 400)
+    }, 1000)
 }
 
-const isPc = computed(() => {
-    return window.innerWidth > 500
-})
+const isFullScreen = ref(!isPc.value)
+
+function onFullScreen() {
+    if(!isFullScreen.value) {
+        height.value = window.innerHeight
+        width.value = window.innerWidth
+        isFullScreen.value = true
+        posX.value = 0
+        posY.value = 0
+    }else{
+        height.value = window.innerHeight * .7
+        width.value = window.innerWidth * .6
+        posX.value = (window.innerWidth - width.value) / 2
+        posY.value = (window.innerHeight - height.value) / 2
+        setTimeout(() => {
+            isFullScreen.value = false
+        }, 500)
+    }
+
+}
 
 const width = ref(isPc.value ? window.innerWidth * .6 : window.innerWidth)
 
@@ -114,8 +150,6 @@ const posY = ref(isPc.value ? (window.innerHeight - height.value) / 2 : 0)
 const offsetY = ref(0)
 
 const isShaking = ref(false)
-
-const isFullScreen = ref(false)
 
 const isDraging = ref(false)
 
@@ -142,7 +176,7 @@ function onMouseMove(e: MouseEvent) {
     if(isDraging.value) {
         posX.value = e.x - offsetX.value
         posY.value = e.y - offsetY.value
-       /*  if(posX.value <= maxCriticalValue.value) {
+       if(posX.value <= maxCriticalValue.value) {
             posX.value = 0
         }
         if(posX.value + main.value?.offsetWidth >= window.innerWidth - maxCriticalValue.value) {
@@ -153,7 +187,7 @@ function onMouseMove(e: MouseEvent) {
         }
         if(posY.value + main.value?.offsetHeight >= window.innerHeight - maxCriticalValue.value) {
             posY.value = window.innerHeight - main.value?.offsetHeight
-        } */
+        }
     }
 }
 
@@ -162,34 +196,62 @@ function onMouseMove(e: MouseEvent) {
 <style lang="scss" scoped>
 .main{
         position: absolute;
-        border-radius: 20px;
+        border-radius: 10px;
         transform-origin: 50% 80%;
-        animation: dialog-in forwards 300ms ease-in-out;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        box-shadow: 0 0 30px #111;
+        box-shadow: 0 0 30px #414141;
+
+        &.fullscreen{
+            border-radius: 0;
+            transition: 500ms;
+        }
         .dialog_top{
             user-select: none;
             padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: grab;
+            border-bottom: 1px solid;
+            // cursor: grab;
             .left, .right{
-                width: 20%;
+                width: 10%;
+                display: flex;
             }
             .left{
-                .back{
-                    font-size: 16px;
+                &:hover{
+                    .iconfont{
+                        color: #000;
+                    }
+                }
+                .iconfont{
+                    font-size: 12px;
                     display: inline-block;
-                    margin-left: 5px;
-                    cursor: pointer;
+                    margin-right: 10px;
+                    cursor: default;
+                    border-radius: 100%;
+                    padding: 2px;
+                    color: transparent;
+                    transition: 200ms;
+                }
+                .close{
+                    background-color: rgb(211, 2, 2);
+                }
+                .m_close{
+                    color: var(--van-text-color);
+                    font-size: 16px;
+                }
+                .mini{
+                    background-color: rgb(241, 157, 1);
+                }
+                .full{
+                    background-color: rgb(0, 182, 39);
                 }
             }
 
             .title{
-                font-size: 18px;
+                font-size: 17px;
                 font-family:'PingFangSC-Medium';
                 font-weight: bold;
             }
@@ -215,13 +277,18 @@ function onMouseMove(e: MouseEvent) {
         }
 }
 
+.opening{
+    animation: dialog-in forwards 300ms ease-in-out;
+}
+
+.closing{
+    animation: dialog-out forwards 300ms ease-in-out;
+}
+
     @media screen and (max-width: 501px) {
         .main{
          border-radius: 0;
         }
     }
 
-.closing{
-    animation: dialog-in reverse forwards 300ms ease-in-out;
-}
 </style>

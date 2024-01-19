@@ -3,49 +3,29 @@
         <div class="footer">
             <div 
                 class="item"
-                v-for="item, index of appList" 
-                @click="item.action && item.action()"  
+                v-for="card, index of AppConfig.footerAppList" 
             >
-                <svg-icon :icon="item.icon" />
+                <SvgIcon :config="card"/>
+            </div>
+            <i v-if="isPc && appStore().appPool.length" class="iconfont icon-PartingLine" style="color: #fff;font-size: 30px;"/>
+            <div 
+                v-if="isPc"
+                class="item"
+                v-for="card, index of appStore().appPool" 
+            >
+                <SvgIcon :config="card" jump-enable/>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {ref} from "vue"
-import { DialogHelper } from "@/helper/DialogHelper";
 import SvgIcon from "./SvgIcon.vue";
-import ConfigModal from "@/views/config/index.vue"
+import { appStore } from "@/config/store";
+import AppConfig from "@/config/appConfig";
+import { UseIsPc } from "@/use/UseIsPc";
 
-const jumpIndex = ref()
-
-let timer: any = null
-
-const appList = ref([
-    {
-        name: '微信',
-        icon: 'icon-weixin1'
-    },
-    {
-        name: 'Gitee',
-
-        icon: 'icon-logo-gitee-g-red'
-    },
-    {
-        name: '抖音',
-        icon: 'icon-douyin',
-        action: () => window.open('//www.douyin.com/', '_blank')
-
-    }, 
-    {
-        name: '设置',
-        icon: 'icon-shezhigengxin',
-        action: () => DialogHelper.show(ConfigModal)
-    },
-  
-])
-
+const { isPc } = UseIsPc();
 
 </script>
 

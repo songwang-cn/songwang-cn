@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import Body from '@/components/Body.vue'
 import { appStore } from './config/store';
 </script>
 

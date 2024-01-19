@@ -1,37 +1,40 @@
 <template>
-    <div class="box" :style="{width: size, height: size}">
-        <svg v-if="isSvg" :style="{width: size, height: size}" aria-hidden="true">
-            <use :xlink:href="`#${icon}`"></use>
+    <div :class="['box', appStore().lastOpenAppId === config.id && jumpEnable && 'jump']" :style="{width: size, height: size}" @click="onAction">
+        <svg v-if="config.icon" :style="{width: size, height: size}" aria-hidden="true">
+            <use :xlink:href="`#${ config.icon}`"></use>
         </svg>
-        <div class="un-svg" v-else>{{ name }}</div>
+        <div class="un-svg" v-else>{{  config.name }}</div>
     </div>
-    <div class="name" v-if="showName">{{ name }}</div>
+    <div class="name" v-if="showName">{{  config.name }}</div>
 </template>
 
 <script lang="ts" setup>
+import {computed} from 'vue';
+import { appStore } from '@/config/store';
+
 
 const props = defineProps({
-    icon: {
-        type: String,
-        default: ''
-    },
-    isSvg: {
-        type: Boolean,
-        default: true
-    },
-    name:{
-        type: String,
-        default: ''
-    },
-    size:{
-        type: String,
-        default: '65px'
+    config: {
+        type: Object,
+        default: () => ({})
     },
     showName:{
         type: Boolean,
         default: false
+    },
+    jumpEnable: {
+        type: Boolean,
+        default: false
     }
 })
+
+const size = computed(() => props.config.size || '60px')
+
+function onAction() {
+  appStore().addAppInPool(props.config)
+  props.config.action?.()
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -42,6 +45,23 @@ const props = defineProps({
     cursor: pointer;
     &:active{
         transform: scale(0.9);
+    }
+}
+
+.jump{
+    animation: jump 1.4s ease-in-out;
+    animation-iteration-count: 4;
+}
+
+@keyframes jump {
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-20px);
+    }
+    100%{
+        transform: translateY(0px);
     }
 }
 .un-svg{

@@ -1,5 +1,17 @@
 import { defineStore } from 'pinia'
 import { BgType } from '@/enum'
+import AppConfig from './appConfig'
+
+function getAppPoolFromStorage(): [any] {
+    const storageAppIdList = JSON.parse(localStorage.getItem('appPool') as any).map(v => v.id)
+    const list = [] as any
+    AppConfig.allAppList.map((app) => {
+        if(storageAppIdList?.includes(app.id)) {
+            list.push(app)
+        }
+    })
+    return list
+}
 
 export const appStore = defineStore('app' ,{
     state: () => ({
@@ -7,6 +19,8 @@ export const appStore = defineStore('app' ,{
         theme: localStorage.getItem('theme') || 'light',
         bgUrl: localStorage.getItem('bgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href,
         lastBgUrl: localStorage.getItem('lastBgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href,
+        appPool: getAppPoolFromStorage(),
+        lastOpenAppId: 0
     }),
     actions: {
         changeBgType(type: BgType){
@@ -27,6 +41,20 @@ export const appStore = defineStore('app' ,{
         setLastBgUrl(url: string){
             this.lastBgUrl = url
             localStorage.setItem('lastBgUrl', this.lastBgUrl)
+        },
+        addAppInPool(card: any) {
+            if(!this.appPool.some(item => item.id === card.id)) {
+                this.appPool.push(card)
+                this.lastOpenAppId = card.id
+            }
+            localStorage.setItem('appPool', JSON.stringify(this.appPool))
+        },
+        removeAppInPool(card: any) {
+            this.appPool = this.appPool.filter(item => item.id !== card.id)
+            localStorage.setItem('appPool', JSON.stringify(this.appPool))
+        },
+        setLastOpenAppId(id: number) {
+            this.lastOpenAppId = id
         }
     }
 })
