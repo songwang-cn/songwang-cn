@@ -3,7 +3,8 @@ import { BgType } from '@/enum'
 import AppConfig from './appConfig'
 
 function getAppPoolFromStorage(): [any] {
-    const storageAppIdList = JSON.parse(localStorage.getItem('appPool') as any).map(v => v.id)
+    const data = JSON.parse(localStorage.getItem('appPool') as any) || []
+    const storageAppIdList = data.map(v => v.id)
     const list = [] as any
     AppConfig.allAppList.map((app) => {
         if(storageAppIdList?.includes(app.id)) {
