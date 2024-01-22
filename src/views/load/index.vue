@@ -122,6 +122,7 @@ function onLogin() {
 
 <style lang="scss" scoped>
 
+
 .load{
     position: absolute;
     inset: 0;
@@ -299,13 +300,12 @@ function onLogin() {
             transition: 400ms;
             border-radius: 10px;
             cursor: pointer;
-            transition: 200ms;
+            transition: 400ms;
             overflow: hidden;
             .iconfont{
               font-size: 26px;
               padding: 5px 20px;
-              animation: ring 2.5s linear infinite;
-              animation-play-state: paused;
+              animation: ring 5s linear infinite;
             }
 
             &:hover{

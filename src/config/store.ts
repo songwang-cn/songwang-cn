@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { BgType } from '@/enum'
 import AppConfig from './appConfig'
+import { MusicEntity } from '@/entity/MusicEntity'
 
 function getAppPoolFromStorage(): [any] {
     const data = JSON.parse(localStorage.getItem('appPool') as any) || []
@@ -14,6 +15,16 @@ function getAppPoolFromStorage(): [any] {
     return list
 }
 
+function getLastMusicObjFromStorage(): any {
+    const entity = new MusicEntity()
+    if(localStorage.getItem('lastMusicObj')) {
+        const last = JSON.parse(localStorage.getItem('lastMusicObj') as any)
+        return entity.setUrl(last.url).setCoverUrl(last.coverUrl).setId(last.id).setDuration(last.dt).setName(last.name)
+    }else{
+        return null
+    }
+}
+
 export const appStore = defineStore('app' ,{
     state: () => ({
         bgType: localStorage.getItem('bgType') || BgType.SYSTEM,
@@ -21,7 +32,8 @@ export const appStore = defineStore('app' ,{
         bgUrl: localStorage.getItem('bgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href,
         lastBgUrl: localStorage.getItem('lastBgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href,
         appPool: getAppPoolFromStorage(),
-        lastOpenAppId: 0
+        lastOpenAppId: 0,
+        lastMusicObj: getLastMusicObjFromStorage() || new MusicEntity()
     }),
     actions: {
         changeBgType(type: BgType){
@@ -51,11 +63,15 @@ export const appStore = defineStore('app' ,{
             localStorage.setItem('appPool', JSON.stringify(this.appPool))
         },
         removeAppInPool(card: any) {
-            this.appPool = this.appPool.filter(item => item.id !== card.id)
+            this.appPool = this.appPool.filter(item => item.id !== card.id) as any
             localStorage.setItem('appPool', JSON.stringify(this.appPool))
         },
         setLastOpenAppId(id: number) {
             this.lastOpenAppId = id
+        },
+        setMusicObj(obj: MusicEntity) {
+            this.lastMusicObj = obj
+            localStorage.setItem('lastMusicObj', JSON.stringify(obj))
         }
     }
 })

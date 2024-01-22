@@ -66,7 +66,7 @@ onMounted(() => {
     display: flex;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center 100%;
+    background-position: center center;
     background-color: rgba($color: #000000, $alpha: 0.5);
     overflow: hidden;
     display: flex;

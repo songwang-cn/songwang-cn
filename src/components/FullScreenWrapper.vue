@@ -8,6 +8,7 @@
         }"
         @mousedown.self="onMousedown"
         @mouseup.self="onMouseUp"
+        @contextmenu.stop
     >
         <slot />
     </div>

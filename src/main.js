@@ -6,7 +6,6 @@ import './assets/iconfont/iconfont.js'
 import AppConfig from '@/config/appConfig'
 import { createPinia } from 'pinia'
 import Vant from 'vant';
-import 'vant/lib/index.css';
 import { ConfigProvider } from 'vant';
 import 'swiper/css';
 import { Lazyload } from 'vant'

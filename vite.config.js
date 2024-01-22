@@ -13,7 +13,8 @@ export default defineConfig({
   assetsInclude: ['**/*.md'],
   server: {
     host: true,
-    port: '1109'
+    port: '1109',
+
   },
   plugins: [
     vue()
