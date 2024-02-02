@@ -25,6 +25,17 @@ function getLastMusicObjFromStorage(): any {
     }
 }
 
+function getHistoryMusicList() {
+    const historyList = JSON.parse(localStorage.getItem('historyMusicList') as any) || []
+    const list = [] as MusicEntity[]
+    historyList.map((music: any) => {
+        if(!list.some((item: MusicEntity) => item.id === music.id)){
+            list.push(new MusicEntity().setUrl(music.url).setCoverUrl(music.coverUrl).setId(music.id).setDuration(music.dt).setName(music.name).setSinger(music.singer))       
+        }
+    })
+    return list
+}
+
 export const appStore = defineStore('app' ,{
     state: () => ({
         bgType: localStorage.getItem('bgType') || BgType.SYSTEM,
@@ -33,7 +44,8 @@ export const appStore = defineStore('app' ,{
         lastBgUrl: localStorage.getItem('lastBgUrl') || new URL(`@/assets/img/wallPaper/1.png`, import.meta.url).href,
         appPool: getAppPoolFromStorage(),
         lastOpenAppId: 0,
-        lastMusicObj: getLastMusicObjFromStorage() || new MusicEntity()
+        lastMusicObj: getLastMusicObjFromStorage() || new MusicEntity(),
+        historyMusicList: getHistoryMusicList() || []
     }),
     actions: {
         changeBgType(type: BgType){
@@ -70,8 +82,15 @@ export const appStore = defineStore('app' ,{
             this.lastOpenAppId = id
         },
         setMusicObj(obj: MusicEntity) {
+            this.addMusicToHistory(JSON.parse(JSON.stringify(obj)))
             this.lastMusicObj = obj
             localStorage.setItem('lastMusicObj', JSON.stringify(obj))
+        },
+        addMusicToHistory(music: MusicEntity) {
+            if(!this.historyMusicList.some((item: MusicEntity) => item.id === music.id)){
+                this.historyMusicList.push(music)
+                localStorage.setItem('historyMusicList', JSON.stringify(this.historyMusicList))
+            }
         }
     }
 })

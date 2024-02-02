@@ -7,8 +7,9 @@
             </van-radio-group>
         </div>
         <div class="content">
-            <div :ref="el => itemRef[index] = el" :style="{ animationDelay: index * 10 + 'ms' }"
-                :class="['item_card', resultIndex.includes(index) ? 'isThis' : '']" v-for="item, index of excelJSON">
+            <div :style="{ animationDelay: index * 10 + 'ms' }"
+                :class="['item_card', resultIndex.includes(index) ? 'isThis' : '']" v-for="item, index of excelJSON"
+                :key="index">
                 <span class="no">{{ item.no }}</span>
                 {{ item.name }}
             </div>
@@ -29,16 +30,8 @@
 
 <script lang="ts" setup>
 import Dialog from "@/components/Dialog.vue"
-import { ref, watchEffect, onMounted } from "vue"
-import Panel from "@/components/Panel.vue"
+import { ref, watchEffect } from "vue"
 import { class7List, class8List } from './list'
-import Result from "./result.vue"
-import { DialogHelper } from "@/helper/DialogHelper"
-import gsap from "gsap"
-import {
-    MenuOutlined
-} from '@ant-design/icons-vue';
-
 
 const visible = ref(false)
 
@@ -46,8 +39,6 @@ const map = {
     'no': '学号',
     'name': '姓名'
 }
-
-const itemRef = ref<any[]>([])
 
 const choseClass = ref(7)
 
@@ -118,6 +109,7 @@ function ininResultPanel() {
     div.style.color = '#000'
     div.style.zIndex = '99'
     div.style.textAlign = 'center'
+    div.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)'
     div.innerText = result.map(v => v.name).join('，')
     document.body.appendChild(div)
 }
@@ -129,47 +121,46 @@ const nowRandomTimer = ref(null as any)
 const nowRandomPassedSecond = ref(0)
 
 async function onRandom() {
-        nowRandomPassedSecond.value = 0
-        // if(!fileList.value.length || !excelJSON.value.length) {
-        //     return SMessage.error('请先导入excel文件')
-        // }
-        let hasResultPanel = document.getElementById('result_panel')
-        if (hasResultPanel) {
-            document.body.removeChild(hasResultPanel)
-        }
-        isRuning.value = true
-        nowRandomTimer.value = setInterval(() => {
-            resultIndex.value = getRandomNumber()
-            excelJSON.value.sort(() => 0.5 - Math.random())
-            ininResultPanel()
-            nowRandomPassedSecond.value += randomSpeed.value
-        }, randomSpeed.value)
-        // await UseCountDown(countDown.value, 'transparent')
-        setTimeout(async () => {
-            stopRandom()
-        }, countDown.value * 1000)
-    
+    nowRandomPassedSecond.value = 0
+    let hasResultPanel = document.getElementById('result_panel')
+    if (hasResultPanel) {
+        document.body.removeChild(hasResultPanel)
+    }
+    isRuning.value = true
+    nowRandomTimer.value = setInterval(() => {
+        resultIndex.value = getRandomNumber()
+        excelJSON.value.sort(() => 0.5 - Math.random())
+        ininResultPanel()
+        nowRandomPassedSecond.value += randomSpeed.value
+    }, randomSpeed.value)
+    setTimeout(async () => {
+        stopRandom()
+    }, countDown.value * 1000)
+
+}
+
+function readName(name: string) {
+    const speechUtterance = new SpeechSynthesisUtterance(name);
+    speechUtterance.rate = 1; // 默认值为1，取值范围从0到2之间
+    speechUtterance.pitch = 1; // 默认值为1，取值范围从0到2之间
+    window.speechSynthesis.speak(speechUtterance);
 }
 
 function stopRandom() {
     if (!isRuning.value) return
+    document.body.removeChild(document.getElementById('result_panel') as any)
     clearInterval(nowRandomTimer.value)
     isRuning.value = false
-    showResult()
+    const names = resultIndex.value.map(v => excelJSON.value[v]).map(v => v.name)
+    setTimeout(() => {
+        readName(names.join(','))
+    }, 300)
 }
 
 function onClean() {
     resultIndex.value = []
 }
 
-async function showResult() {
-    let hasResultPanel = document.getElementById('result_panel')
-    if (hasResultPanel) {
-        document.body.removeChild(hasResultPanel)
-    }
-   /*  await DialogHelper.show(Result, resultIndex.value.map(v => excelJSON.value[v]))
-    onRandom() */
-}
 </script>
 
 <style lang="scss" scoped>
@@ -179,9 +170,10 @@ async function showResult() {
     padding-bottom: 15px;
 }
 
-.filter{
+.filter {
     padding: 10px;
 }
+
 .content {
     width: 100%;
     position: relative;
@@ -190,7 +182,6 @@ async function showResult() {
 }
 
 .item_card {
-    transform: scale(0.88);
     background-color: #007aff;
     backdrop-filter: blur(10px);
     border-radius: 10px;
@@ -199,7 +190,8 @@ async function showResult() {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20%;
+    width: 19%;
+    margin: 0 0 1% 1%;
     height: 60px;
     font-size: 16px;
     line-height: 15px;
@@ -213,20 +205,23 @@ async function showResult() {
         left: 5px;
         font-size: 14px;
     }
-    
+
 }
-.isThis{
+
+.isThis {
     background-color: #ff8800;
     animation: jump 1s infinite;
 
     @keyframes jump {
-        0%{
+        0% {
             transform: scale(0.8);
         }
-        50%{
+
+        50% {
             transform: scale(0.9);
         }
-        100%{
+
+        100% {
             transform: scale(0.8);
         }
     }

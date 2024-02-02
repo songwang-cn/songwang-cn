@@ -26,6 +26,13 @@ export var AllAppList = [
         }
     },
     {
+        id: 7,
+        name: '去听歌',
+        action: () => {
+            window.open('https://song-wang.gitee.io/music-player/#/', '_blank')
+        }
+    },
+    {
         id: 4,
         name: '谷歌',
         icon: 'icon-Chrome',

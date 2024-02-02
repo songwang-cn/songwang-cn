@@ -1,37 +1,27 @@
 <template>
-    <FullScreenWrapper 
-        :is-open="isOpen"
-        @close="onBubClose"
-    >
-        <div 
-            :class="['music', isClosing && 'inClosing', isOpen && 'is-open']" 
-            @mousedown="onMouseDown" 
-            @mouseup="onMouseUp"
-            @touchstart="onTouchStart"
-            @touchmove="onTouchMove"
-            @touchend="onTouchEnd"
-            :style="{
+    <FullScreenWrapper :is-open="isOpen" @close="onBubClose">
+        <div :class="['music', isClosing && 'inClosing', isOpen && 'is-open']" @mousedown="onMouseDown" @mouseup="onMouseUp"
+            @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" :style="{
                 width: bubSize + 'px',
                 height: bubSize + 'px',
-                top: y - (searchPanelIsOpen && !isPc ? searchPanelWidth/2: 0) + 'px',
-                left: x - (searchPanelIsOpen && isPc ? searchPanelWidth/2 : 0) + 'px',
-                borderRadius: searchPanelIsOpen ?( isPc ? '30px 0 0 30px' : '30px 30px 0 0') : '30px'
-            }"
-        >
+                top: y - (searchPanelIsOpen && !isPc ? searchPanelWidth / 2 : 0) + 'px',
+                left: x - (searchPanelIsOpen && isPc ? searchPanelWidth / 2 : 0) + 'px',
+                borderRadius: searchPanelIsOpen ? (isPc ? '30px 0 0 30px' : '30px 30px 0 0') : '30px'
+            }">
             <div class="music-content">
-                <div @click="openSearchPanel" :style="{
-                    transform: `rotate(${searchPanelIsOpen ? 180 : 0}deg)`
-                }" v-if="isOpen" class="section-bar iconfont icon-caidanzhankai" />
+                <div v-if="isOpen" :style="{
+                    left: '30px',
+                }" class="section-bar iconfont icon-lishixiao" />
+                <div @click="openSearchPanel" v-if="isOpen" class="section-bar iconfont icon-sousuo" />
                 <div class="music-top">
-                    <div  
-                        :class="[
-                            'music-pic', 
-                            isPlaying && 'playing',
-                            isOpen && 'is-open'
-                        ]" 
-                    >
-                        <van-image :class="isPlaying ? 'playing' : 'pause'" class="music_img" :src="MusicObj.coverUrl" width="65%" height="65%" />
-                        <div class="mask"/>
+                    <div :class="[
+                        'music-pic',
+                        isPlaying && 'playing',
+                        isOpen && 'is-open'
+                    ]">
+                        <van-image :class="isPlaying ? 'playing' : 'pause'" class="music_img" :src="MusicObj.coverUrl"
+                            width="65%" height="65%" />
+                        <div class="mask" />
                     </div>
                 </div>
                 <div class="ctl" v-if="isOpen">
@@ -41,32 +31,28 @@
                         </van-slider>
                         <div class="time-left">
                             {{ getMusicTimeString(musicAudio.getDuration()) }}
-                        </div> 
+                        </div>
                         <div class="time-right">
                             {{ getMusicTimeString(MusicObj.dt / 1000) }}
                         </div>
                     </div>
                     <div class="act">
-                        <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onPre"/>
-                        <i :class="['music-ctrl iconfont', isPlaying ? 'icon-zanting' : 'icon-zantingbofang']" @click="onPlay"/>
-                        <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onNext" style="transform: rotate(180deg);"/>
+                        <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onPre" />
+                        <i :class="['music-ctrl iconfont', isPlaying ? 'icon-zanting' : 'icon-zantingbofang']"
+                            @click="onPlay" />
+                        <i class="music-ctrl iconfont icon-shixin-shangyishou" @click="onNext"
+                            style="transform: rotate(180deg);" />
                     </div>
                 </div>
             </div>
             <div v-if="searchPanelIsOpen" class="search-panel" :style="{
                 width: searchPanelWidth + 'px',
                 right: isPc ? -searchPanelWidth + 2 + 'px' : 0,
-                top: !isPc ? searchPanelWidth - 2 +'px' : 0,
+                top: !isPc ? searchPanelWidth - 2 + 'px' : 0,
                 borderRadius: isPc ? '0 30px 30px 0' : ' 0 0 30px 30px'
-            }"
-            >
-                <div class="content">   
-                    <van-search 
-                        placeholder="输入关键词搜索歌曲" 
-                        style="padding: 0;" 
-                        v-model="keyword" 
-                        @search="onSearch"
-                    />
+            }">
+                <div class="content">
+                    <van-search placeholder="输入关键词搜索歌曲" style="padding: 0;" v-model="keyword" @search="onSearch" />
                     <div v-if="songList.length" class="song-list">
                         <div v-for="song of songList" class="item" @click="playSong(song)">
                             <div class="left">
@@ -77,16 +63,12 @@
                             </div>
                         </div>
                     </div>
-                    <van-empty v-else style="flex: 1;" description="空空如也"/>
-                    <van-pagination 
-                        v-if="songList.length" 
-                        v-model="currentPage"
-                        :total-items="totalCount" 
-                        @change="onPageChange"
-                    />
+                    <van-empty v-else style="flex: 1;" description="空空如也" />
+                    <van-pagination mode="simple" v-if="songList.length" v-model="currentPage" :total-items="totalCount"
+                        @change="onPageChange" />
                 </div>
             </div>
-        </div> 
+        </div>
     </FullScreenWrapper>
 </template>
 
@@ -159,10 +141,10 @@ function onMouseDown(e: MouseEvent) {
 }
 
 function onMouseMove(e: MouseEvent) {
-    if(isDraging.value && !isOpen.value){
-        x.value = e.clientX-bubSize.value/2 
-        y.value = e.clientY-bubSize.value/2 
-    } 
+    if (isDraging.value && !isOpen.value) {
+        x.value = e.clientX - bubSize.value / 2
+        y.value = e.clientY - bubSize.value / 2
+    }
 }
 
 function onMouseUp() {
@@ -171,56 +153,55 @@ function onMouseUp() {
     console.log('time', Date.now() - startTime.value)
     isDraging.value = false
     isClosing.value = true
-    
-    if(isOpen.value) return
 
-    onAdsorption()   
+    if (isOpen.value) return
 
-    if(Date.now() - startTime.value < 200 && !isOpen.value) {
+    onAdsorption()
+
+    if (Date.now() - startTime.value < 200 && !isOpen.value) {
         console.log('open')
         onBubOpen()
     }
 }
 
 
-console.log(window.innerHeight - windowMargin.value*2 - bubSize.value - adsorPintDistanceY.value)
+console.log(window.innerHeight - windowMargin.value * 2 - bubSize.value - adsorPintDistanceY.value)
 
 //吸附
 function onAdsorption() {
-    if(x.value > (window.innerWidth - windowMargin.value*2) / 2 - bubSize.value / 2) {
-        x.value = window.innerWidth - windowMargin.value*2 - bubSize.value
-    }else{
+    if (x.value > (window.innerWidth - windowMargin.value * 2) / 2 - bubSize.value / 2) {
+        x.value = window.innerWidth - windowMargin.value * 2 - bubSize.value
+    } else {
         x.value = 0
     }
 
-    if(y.value > window.innerHeight - windowMargin.value*2 - bubSize.value - adsorPintDistanceY.value) {
-        y.value = window.innerHeight - windowMargin.value*2 - bubSize.value
+    if (y.value > window.innerHeight - windowMargin.value * 2 - bubSize.value - adsorPintDistanceY.value) {
+        y.value = window.innerHeight - windowMargin.value * 2 - bubSize.value
     }
-    if(y.value < adsorPintDistanceY.value ){
+    if (y.value < adsorPintDistanceY.value) {
         y.value = 0
     }
 }
 
-function onTouchStart(e: TouchEvent){
+function onTouchStart(e: TouchEvent) {
     isClosing.value = false
     isDraging.value = true
 }
 
-function onTouchMove(e: TouchEvent){
-    console.log(window)
-    if(isDraging.value && !isOpen.value){
-        x.value = e.touches[0].clientX-bubSize.value/2 < 0 ? 0 : e.touches[0].clientX-bubSize.value/2 > window.innerWidth - bubSize.value ? window.innerWidth - bubSize.value : e.touches[0].clientX-bubSize.value/2
-        y.value = e.touches[0].clientY-bubSize.value/2 < 0 ? 0 : e.touches[0].clientY-bubSize.value/2 > window.innerHeight - bubSize.value ? window.innerHeight - bubSize.value : e.touches[0].clientY-bubSize.value/2
+function onTouchMove(e: TouchEvent) {
+    if (isDraging.value && !isOpen.value) {
+        x.value = e.touches[0].clientX - bubSize.value / 2 < 0 ? 0 : e.touches[0].clientX - bubSize.value / 2 > window.innerWidth - bubSize.value ? window.innerWidth - bubSize.value : e.touches[0].clientX - bubSize.value / 2
+        y.value = e.touches[0].clientY - bubSize.value / 2 < 0 ? 0 : e.touches[0].clientY - bubSize.value / 2 > window.innerHeight - bubSize.value ? window.innerHeight - bubSize.value : e.touches[0].clientY - bubSize.value / 2
     }
 }
 
 const isClosing = ref(false)
 
-function onTouchEnd(){
+function onTouchEnd() {
     isDraging.value = false
     isClosing.value = true
     //自动吸边
-    if(isOpen.value) return
+    if (isOpen.value) return
 
     onAdsorption()
 }
@@ -229,12 +210,12 @@ onMounted(() => {
     window.onresize = () => {
         onBubClose()
     }
-   /*  window.addEventListener('click', (e) => {
-        console.log('click', e)
-        if(isOpen.value && !e.target?.className.includes('music')){
-            onBubClose()
-        }
-    }) */
+    /*  window.addEventListener('click', (e) => {
+         console.log('click', e)
+         if(isOpen.value && !e.target?.className.includes('music')){
+             onBubClose()
+         }
+     }) */
 })
 
 function onBubOpen() {
@@ -242,15 +223,15 @@ function onBubOpen() {
     lastY.value = y.value
     console.log('是点击')
     isOpen.value = true
-    bubSize.value = (window.innerWidth - windowMargin.value*2) < 500 ? 350 : (window.innerWidth / 2 > 700 ? 700 : window.innerWidth / 2)
+    bubSize.value = (window.innerWidth - windowMargin.value * 2) < 500 ? 350 : (window.innerWidth / 2 > 700 ? 700 : window.innerWidth / 2)
     x.value = (window.innerWidth - bubSize.value) / 2
-    y.value = (window.innerHeight - bubSize.value)  / 2
+    y.value = (window.innerHeight - bubSize.value) / 2
 }
 
 function onBubClose() {
     isDraging.value = false
     bubSize.value = 60
-    x.value = lastX.value  
+    x.value = lastX.value
     y.value = lastY.value
     isOpen.value = false
     searchPanelIsOpen.value = false
@@ -264,9 +245,17 @@ function openSearchPanel() {
     searchPanelIsOpen.value = !searchPanelIsOpen.value
 }
 
+const historyIsOpen = ref(false)
+
+function openHistory() {
+    historyIsOpen.value = true
+}
+
 const songList = ref([] as any[])
 
 const currentPage = ref(1)
+
+const pageSize = ref(30)
 
 const totalCount = ref(0)
 
@@ -276,7 +265,20 @@ async function onSearch() {
         message: '加载中...',
         duration: 2
     })
-    const res = await fetch(`https://v2.alapi.cn/api/music/search?keyword=${keyword.value}&page=${currentPage.value}&token=sumBlLtuZ4h4r7DO`)
+    const res = await fetch(
+        'https://v2.alapi.cn/api/music/search',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                keyword: keyword.value,
+                page: currentPage.value,
+                limit: pageSize.value,
+                token: 'sumBlLtuZ4h4r7DO'
+            })
+        })
     const { data } = await res.json()
     songList.value = data.songs
     totalCount.value = data.songCount
@@ -303,10 +305,12 @@ function onProgressChange(num: number) {
 
 function onPlay() {
     isPlaying.value = !isPlaying.value
-    if(isPlaying.value) {
+    if (isPlaying.value) {
         musicAudio.play()
-    }else{
+        initPlayTimer()
+    } else {
         musicAudio.pause()
+        clearPlayTimer()
     }
 }
 
@@ -328,22 +332,23 @@ async function getSongDetail(song: any) {
      * @param duration
      */
     MusicObj.value
-    .setName(data.songs[0].name)
-    .setCoverUrl(data.songs[0].al.picUrl)
-    .setDuration(data.songs[0].dt)
+        .setName(data.songs[0].name)
+        .setCoverUrl(data.songs[0].al.picUrl)
+        .setDuration(data.songs[0].dt)
+        .setSinger(data.songs[0].ar.map(v => v.name).join(','))
 }
 
 async function playSong(song: any) {
     await getSongDetail(song)
     const playUrl = `https://v2.alapi.cn/api/music/url?id=${song.id}&token=sumBlLtuZ4h4r7DO`
-     /**
-     * 设置音乐信息
-     * @param id
-     * @param url
-     */
+    /**
+    * 设置音乐信息
+    * @param id
+    * @param url
+    */
     MusicObj.value
-    .setId(song.id)
-    .setUrl(playUrl)
+        .setId(song.id)
+        .setUrl(playUrl)
 
     musicAudio.setUrl(playUrl).play()
     appStore().setMusicObj(MusicObj.value)
@@ -357,7 +362,7 @@ function initPlayTimer() {
     clearPlayTimer()
     playTimer.value = setInterval(() => {
         console.log(musicAudio.getDuration(), MusicObj.value.dt)
-        progress.value = musicAudio.getDuration()*1000 / MusicObj.value.dt * 100
+        progress.value = musicAudio.getDuration() * 1000 / MusicObj.value.dt * 100
         console.log(progress.value)
     }, 1000)
 }
@@ -372,31 +377,32 @@ function getMusicTimeString(seconds: number) {
 }
 
 function fillString(num: number) {
-    return num > 10 ? num : '0'+num
+    return num > 10 ? num : '0' + num
 }
 
 </script>
 
 <style lang="scss" scoped>
-
-.music{
+.music {
     user-select: none;
     position: absolute;
     cursor: pointer;
     display: flex;
-    &.inClosing{
+
+    &.inClosing {
         transition: 500ms all ease-in-out;
     }
-    &.is-open{
+
+    &.is-open {
         background: #ea3e3c;
     }
 
-    .music-content{
+    .music-content {
         height: 100%;
         position: relative;
         flex: 1;
 
-        .section-bar{
+        .section-bar {
             transition: 500ms;
             position: absolute;
             right: 25px;
@@ -405,23 +411,25 @@ function fillString(num: number) {
             color: #fff;
             z-index: 999;
         }
-        .music-top{
+
+        .music-top {
             position: absolute;
             inset: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-           
-            .music-pic{
+
+            .music-pic {
                 width: 100%;
                 height: 100%;
                 background: url('@/assets/img/music-bg.png');
                 background-size: 100% 100%;
                 position: relative;
                 border-radius: 100%;
-                box-shadow: 0 0 20px rgba(0,0,0,.8);
+                box-shadow: 0 0 20px rgba(0, 0, 0, .8);
                 transition: 400ms all ease-in-out;
-                &::after{
+
+                &::after {
                     content: '';
                     position: absolute;
                     inset: 0;
@@ -436,27 +444,29 @@ function fillString(num: number) {
                     transform: rotate(-90deg);
                 }
 
-                &.is-open{
+                &.is-open {
                     margin: 10% auto;
                     width: 60%;
                     height: 60%;
                 }
 
-                &.playing{
-                    &::after{
+                &.playing {
+                    &::after {
                         opacity: 1;
                         transform: rotate(-50deg);
                     }
                 }
-                .music_img{   
+
+                .music_img {
                     overflow: hidden;
-                    border-radius: 100%; 
+                    border-radius: 100%;
                     animation: ring infinite 30s linear;
                     position: absolute;
                     inset: 0;
                     margin: auto;
                     animation-delay: 600ms;
-                  /*   &::after{
+
+                    /*   &::after{
                         content: '';
                         inset: 0;
                         width: 10%;
@@ -467,49 +477,55 @@ function fillString(num: number) {
                         background: #000000;
                         box-shadow: 0 0 20px #acacac;
                     } */
-                    &.playing{
+                    &.playing {
                         box-shadow: 0 0 20px #929292;
                         animation-play-state: running;
                     }
-                    &.pause{
+
+                    &.pause {
                         box-shadow: none;
                         animation-play-state: paused;
-                    } 
+                    }
                 }
 
-                .mask{
+                .mask {
                     position: absolute;
                     inset: 0;
                 }
 
                 @keyframes ring {
-                    0%{
+                    0% {
                         transform: rotate(0deg);
                     }
-                    100%{
+
+                    100% {
                         transform: rotate(360deg);
                     }
                 }
             }
         }
-        .ctl{
+
+        .ctl {
             position: absolute;
             bottom: 6%;
             width: 60%;
             left: 0;
             right: 0;
             margin: 0 auto;
-            .song-name{
+
+            .song-name {
                 width: 100%;
                 text-align: center;
                 font-size: 14px;
                 color: #fff;
             }
-            .progress{
+
+            .progress {
                 width: 100%;
                 padding: 16px 0;
                 position: relative;
-                .time-left{
+
+                .time-left {
                     line-height: 30px;
                     position: absolute;
                     left: -40px;
@@ -517,7 +533,8 @@ function fillString(num: number) {
                     color: #fff;
                     font-size: 12px;
                 }
-                .time-right{
+
+                .time-right {
                     line-height: 30px;
                     position: absolute;
                     right: -40px;
@@ -526,70 +543,83 @@ function fillString(num: number) {
                     font-size: 12px;
                 }
             }
-            .act{
+
+            .act {
                 width: 100%;
                 display: flex;
                 justify-content: space-between;
             }
-            .iconfont{
+
+            .iconfont {
                 font-size: 24px;
                 color: #fff;
             }
         }
     }
 
-    .search-panel{
+    .search-panel {
         position: absolute;
         background-color: #ea3e3c;
         height: 100%;
         border-radius: 0 30px 30px 0;
         display: flex;
-            animation: fade-in 500ms ease-in-out;
+        animation: fade-in 500ms ease-in-out;
 
         @keyframes fade-in {
-            0%{
+            0% {
                 opacity: 0;
                 transform: translateX(-100px);
             }
-            100%{
+
+            100% {
                 opacity: 1;
                 transform: translateX(0px);
             }
         }
 
-        .content{
+        .content {
             flex: 1;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            :deep(.van-empty__description){
+
+            :deep(.van-empty__description) {
                 color: #eee;
             }
         }
-        .song-list{
+
+        .song-list {
             flex: 1;
             overflow-y: auto;
-            padding: 10px;
-            .item{
+            padding: 10px 0;
+
+            .item {
                 font-size: 14px;
-                padding:10px 5px;
+                padding: 10px 5px;
                 margin-bottom: 5px;
                 color: #fff;
-                border-bottom: 1px solid #fff;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 transition: 200ms;
-                .left{
+
+                .left {
                     display: flex;
                     align-items: center;
-                    .name{
-                        padding-left: 10px;
+                    flex: 1;
+
+                    .name {
+                        text-align: left;
                     }
                 }
-                &:hover{
+
+                .singer {
+                    flex: 1;
+                    text-align: right;
+                }
+
+                &:hover {
                     color: #ea3e3c;
-                    border-radius: 5px;
                     background-color: #fff;
                 }
             }

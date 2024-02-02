@@ -10,6 +10,9 @@ export default defineConfig({
       '@': '/src'
     }
   },
+  build: {
+    outDir: 'docs'
+  },
   assetsInclude: ['**/*.md'],
   server: {
     host: true,

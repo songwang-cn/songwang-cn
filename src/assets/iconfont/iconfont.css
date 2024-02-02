@@ -1,9 +1,9 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3853517 */
-  src: url('iconfont.woff2?t=1705645569966') format('woff2'),
-       url('iconfont.woff?t=1705645569966') format('woff'),
-       url('iconfont.ttf?t=1705645569966') format('truetype'),
-       url('iconfont.svg?t=1705645569966#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/c/font_3853517_mtbbw593kdm.woff2?t=1706065007504') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3853517_mtbbw593kdm.woff?t=1706065007504') format('woff'),
+       url('//at.alicdn.com/t/c/font_3853517_mtbbw593kdm.ttf?t=1706065007504') format('truetype'),
+       url('//at.alicdn.com/t/c/font_3853517_mtbbw593kdm.svg?t=1706065007504#iconfont') format('svg');
 }
 
 .iconfont {
@@ -12,6 +12,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sousuo:before {
+  content: "\e684";
+}
+
+.icon-lishixiao:before {
+  content: "\e8bd";
+}
+
+.icon-lishijilu:before {
+  content: "\eaf7";
+}
+
+.icon-liebiao:before {
+  content: "\e623";
+}
+
+.icon-lishiliebiao:before {
+  content: "\e6cf";
+}
+
+.icon-zhengzaibofang:before {
+  content: "\e624";
 }
 
 .icon-PartingLine:before {
@@ -369,4 +393,3 @@
 .icon-logo:before {
   content: "\e600";
 }
-

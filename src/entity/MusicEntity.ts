@@ -8,6 +8,13 @@ export class MusicEntity extends BaseEntity{
     coverUrl?: string
 
     dt!: number
+
+    singer?: string
+
+    setSinger(singer: string) {
+        this.singer = singer
+        return this
+    }
     
     setUrl(url: string) {
         this.url = url
