@@ -29,7 +29,7 @@ export var AllAppList = [
         id: 7,
         name: '去听歌',
         action: () => {
-            window.open('https://song-wang.gitee.io/music-player/#/', '_blank')
+            window.open('https://songwang-cn.gitee.io/music-player/#/', '_blank')
         }
     },
     {

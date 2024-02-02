@@ -1,7 +1,7 @@
 <template>
   <div class="load">
     <div class="center" v-if="progress < 100">
-      <i class="iconfont icon-ios" />
+      <img height="50px" src="@/assets/img/2.png" />
       <div class="progress">
         <div 
         :class="['bar', isloading && 'slow-add']" 
@@ -75,9 +75,9 @@ function initTimer() {
     if (progress.value >= 100) {
       isloading.value = true
     }else{
-      progress.value+=10
+      progress.value+=1
     }
-  }, 100)
+  }, 50)
 }
 
 initTimer()

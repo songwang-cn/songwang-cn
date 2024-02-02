@@ -32,8 +32,8 @@ async function onRandomTrigger() {
     transition: 500ms;
     background-color: #fff;
     position: absolute;
-    inset: 0;
-    margin: 0 auto;
+    top: 0;
+    left: 25%;
     z-index: 999;
     box-shadow: 0 0 10px #949494;
     div{
