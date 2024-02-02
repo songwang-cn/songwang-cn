@@ -7,10 +7,11 @@ export const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'Load',
         component: () => import('../views/load/index.vue'),
-        meta: {
-            title: '资源加载页',
-            icon: 'icon-shouye-zhihui'
-        },
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: () => import('../views/login/index.vue'),
     },
     {
         path: '/home',

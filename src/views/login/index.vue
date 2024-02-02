@@ -1,70 +1,63 @@
 <template>
   <div class="load">
-    <div class="center">
-      <img height="50px" src="@/assets/img/2.png" />
-      <div class="progress">
-        <div 
-        :class="['bar', isloading && 'slow-add']" 
-        :style="{
-            width: progress + '%'
-          }"
-        />
+    <div 
+      class="load-finish"
+      :style="{'background-image': `url(${appStore().bgUrl})`}"
+     >
+      <div class="inner">
+        <div class="center">
+          <div class="head">
+            <van-image height="100%" width="100%" :src="headIcon"/>
+          </div>
+          <div class="inp">
+            <van-field placeholder="请输入密码" type="password" class="password" v-model="password"/>
+            <div class="login" @click="onLogin" v-if="password">
+              <i class="iconfont icon-arrow-right" />
+            </div>
+          </div>
+        </div>
+        <div class="action">
+          <div class="item"  @click="AppConfig.router.replace('/')">
+            <i class="iconfont icon-zhongqi" />
+            <div>重新启动</div>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script lang="ts" setup>
-import {ref, onUnmounted } from "vue"
+import {ref,nextTick, onActivated, onUnmounted } from "vue"
 import AppConfig from "@/config/appConfig"
+import headIcon from '@/assets/img/Jay.png'
 import { showToast } from "vant"
+import { appStore } from '@/config/store';
 
-const allWallPaper = import.meta.glob('../../assets/img/wallPaper/*.*', {eager: true})
-
-function preLoadResource() {
-  for(let key in allWallPaper){
-    const img = new Image()
-    img.src = allWallPaper[key].default
-    img.onload = () => {
-      console.log('加载成功')
-    }
-  }
-}
-
-preLoadResource()
-
-const progress = ref(0)
 
 let timer = null as any
 
 const isloading = ref(false)
 
-function initTimer() {
-  isloading.value = true
-  timer = setInterval(() => {
-    if (progress.value >= 100) {
-      clearTimer()
-      AppConfig.router.push('/login')
-    }else{
-      progress.value+=.2
-    }
-  }, 10)
+const password = ref('')
+
+function onLogin() {
+  if(password.value === '123456'){
+    showToast({
+      type: 'loading',
+      message: '正在登陆'
+    })
+    setTimeout(() => {
+      AppConfig.router.push("/home")
+    }, 2000)
+  }else{
+    showToast({
+      message: '密码错误'
+
+    })
+  }
 }
-
-initTimer()
-
-function clearTimer() {
-  isloading.value = false
-  clearInterval(timer)
-  timer = null
-}
-
-onUnmounted(() => {
-  clearTimer()
-})
-
-
-
 
 </script>
 

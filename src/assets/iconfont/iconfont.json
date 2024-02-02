@@ -6,6 +6,188 @@
   "description": "框架",
   "glyphs": [
     {
+      "icon_id": "38968772",
+      "name": "vscode",
+      "font_class": "vscode1",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "16627017",
+      "name": "Edge",
+      "font_class": "Edge-01",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "5643512",
+      "name": "关闭",
+      "font_class": "guanbi1",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "6160694",
+      "name": "最小化",
+      "font_class": "zuixiaohua1",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "5387549",
+      "name": "刷新",
+      "font_class": "shuaxin",
+      "unicode": "eafd",
+      "unicode_decimal": 60157
+    },
+    {
+      "icon_id": "35084224",
+      "name": "箭头",
+      "font_class": "arrow-left-line",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "7594288",
+      "name": "16gl-square",
+      "font_class": "16gl-square",
+      "unicode": "ea8b",
+      "unicode_decimal": 60043
+    },
+    {
+      "icon_id": "17046885",
+      "name": "消息窗口-右上角-缩小窗口",
+      "font_class": "xiaoxichuangkou-youshangjiao-suoxiaochuangkou",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "34582156",
+      "name": "关机",
+      "font_class": "guanji",
+      "unicode": "e69e",
+      "unicode_decimal": 59038
+    },
+    {
+      "icon_id": "1305477",
+      "name": "日历",
+      "font_class": "rili",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "4504176",
+      "name": "企业微信",
+      "font_class": "qiyeweixin",
+      "unicode": "e7bc",
+      "unicode_decimal": 59324
+    },
+    {
+      "icon_id": "29522619",
+      "name": "13G关机",
+      "font_class": "a-13Gguanji",
+      "unicode": "e67c",
+      "unicode_decimal": 59004
+    },
+    {
+      "icon_id": "34218691",
+      "name": "播放列表",
+      "font_class": "bofangliebiao",
+      "unicode": "e86a",
+      "unicode_decimal": 59498
+    },
+    {
+      "icon_id": "13430680",
+      "name": "单曲循环",
+      "font_class": "danquxunhuan",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "34218745",
+      "name": "顺序播放",
+      "font_class": "shunxubofang",
+      "unicode": "e871",
+      "unicode_decimal": 59505
+    },
+    {
+      "icon_id": "26439656",
+      "name": "动态壁纸",
+      "font_class": "dongtaibizhi",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "11372693",
+      "name": "删除",
+      "font_class": "shanchu1",
+      "unicode": "e8b6",
+      "unicode_decimal": 59574
+    },
+    {
+      "icon_id": "16398948",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e852",
+      "unicode_decimal": 59474
+    },
+    {
+      "icon_id": "21417211",
+      "name": "添加",
+      "font_class": "tianjiadingdan1",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "11020382",
+      "name": "添加到列表",
+      "font_class": "tianjiadaoliebiao",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "1100385",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "2076371",
+      "name": " 历史小2",
+      "font_class": "lishixiao",
+      "unicode": "e8bd",
+      "unicode_decimal": 59581
+    },
+    {
+      "icon_id": "5387536",
+      "name": "历史记录",
+      "font_class": "lishijilu",
+      "unicode": "eaf7",
+      "unicode_decimal": 60151
+    },
+    {
+      "icon_id": "5029",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "15795891",
+      "name": "历史列表",
+      "font_class": "lishiliebiao",
+      "unicode": "e6cf",
+      "unicode_decimal": 59087
+    },
+    {
+      "icon_id": "38343315",
+      "name": "正在播放-copy",
+      "font_class": "zhengzaibofang",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
       "icon_id": "4902387",
       "name": "分割线",
       "font_class": "PartingLine",

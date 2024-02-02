@@ -17,6 +17,7 @@
       {{ `${leftString} ${HH}:${mm}` }}
     </div>
     <div class="right">
+      <div class="lock iconfont icon-guanji" @click="AppConfig.router.replace('/login')"/>
       <div class="battery">
         <div class="percent">80%</div>
         <i class="iconfont icon-icon-test" />
@@ -26,6 +27,7 @@
 </template>
 
 <script lang="ts" setup>
+import AppConfig from '@/config/appConfig';
 import {UseTime} from '@/use/UseTime'
 
 const { HH, mm, leftString } = UseTime()
@@ -49,6 +51,11 @@ const { HH, mm, leftString } = UseTime()
   .right{
     display: flex;
     justify-content: flex-end;
+
+    .lock{
+      margin-right: 20px;
+      cursor: pointer;
+    }
   }
 
   .iconfont{
