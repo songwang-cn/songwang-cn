@@ -22,7 +22,7 @@
             <van-image height="100%" width="100%" :src="headIcon"/>
           </div>
           <div class="inp">
-            <van-field size="small" placeholder="请输入密码" type="password" class="password" v-model="password"/>
+            <van-field placeholder="请输入密码" type="password" class="password" v-model="password"/>
             <div class="login" @click="onLogin" v-if="password">
               <i class="iconfont icon-arrow-right" />
             </div>
@@ -63,7 +63,7 @@ preLoadResource()
 
 const progress = ref(0)
 
-let timer = null
+let timer = null as any
 
 const isloading = ref(false)
 
@@ -73,11 +73,11 @@ function initTimer() {
   isloading.value = true
   timer = setInterval(() => {
     if (progress.value >= 100) {
-      isloading.value = true
+      clearTimer()
     }else{
-      progress.value+=1
+      progress.value+=.2
     }
-  }, 50)
+  }, 10)
 }
 
 initTimer()
