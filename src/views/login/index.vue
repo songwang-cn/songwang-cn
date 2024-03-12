@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts" setup>
-import {ref,nextTick, onActivated, onUnmounted } from "vue"
+import {ref, nextTick, onActivated, onUnmounted } from "vue"
 import AppConfig from "@/config/appConfig"
 import headIcon from '@/assets/img/Jay.png'
 import { showToast } from "vant"
