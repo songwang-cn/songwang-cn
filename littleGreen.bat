@@ -1,8 +1,8 @@
 @echo off
 git pull
 ::随机生成12-（12+18-1）的随机数count%%(end-1)+start
-set count=3
-::set /a count=count%%18+12
+set count=%random%
+set /a count=count%%18+12
 echo total:%count%
 for /l %%i in (1, 1, %count%) do (
 	echo var a = [%%i] > index.js
