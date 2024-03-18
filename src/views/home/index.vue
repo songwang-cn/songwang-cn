@@ -15,6 +15,9 @@
         <AppTable :list="appList2" />
       </SwiperSlide>
       <SwiperSlide>
+        <Me />
+      </SwiperSlide>
+      <SwiperSlide>
         <Note />
       </SwiperSlide>
     </Swiper>
@@ -24,6 +27,7 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import Note from '@/views/note/index.vue';
+import Me from '@/views/me/index.vue'
 import Panel from '@/components/Panel.vue';
 import AppConfig from '@/config/appConfig';
 import AppTable from '@/components/AppTable.vue';
